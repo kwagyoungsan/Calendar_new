@@ -15,7 +15,7 @@ class MinMaxDecorator(min:CalendarDay, max:CalendarDay):DayViewDecorator {
                 || (day?.month == minDay.month && day.day < minDay.day)
     }
     override fun decorate(view: DayViewFacade?) {
-        view?.addSpan(object:ForegroundColorSpan(Color.parseColor("#d2d2d2")){})
+        view?.addSpan(object:ForegroundColorSpan(Color.parseColor("#000000")){})
         view?.setDaysDisabled(true)
     }
 }
