@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
     private val binding get() = mBinding!!
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
@@ -52,6 +53,7 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.habitbt.setOnClickListener({
+            layoutInflater
             val intent = Intent(this, HabitActivity::class.java)
             startActivity(intent)
         })
