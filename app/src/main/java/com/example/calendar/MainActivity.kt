@@ -1,22 +1,23 @@
 package com.example.calendar
 
-import android.content.Context
-import android.graphics.Color
-import android.graphics.Typeface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.style.ForegroundColorSpan
-import android.text.style.RelativeSizeSpan
-import android.text.style.StyleSpan
+import com.example.calendar.databinding.ActivityMainBinding
 import com.prolificinteractive.materialcalendarview.*
 import java.util.Calendar
-import java.time.LocalDate
 
 
 class MainActivity : AppCompatActivity() {
+    private var mBinding: ActivityMainBinding? = null
+    private val binding get() = mBinding!!
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        mBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
 
         val startTimeCalendar: Calendar = Calendar.getInstance()
         val endTimeCalendar: Calendar = Calendar.getInstance()
@@ -26,8 +27,6 @@ class MainActivity : AppCompatActivity() {
         val currentDate = startTimeCalendar.get(Calendar.DATE)
 
         val materialCalendar : MaterialCalendarView = findViewById(R.id.materialCalendar)
-
-
 
         materialCalendar.state().edit()
             .setFirstDayOfWeek(Calendar.SUNDAY)
@@ -49,5 +48,12 @@ class MainActivity : AppCompatActivity() {
 
         materialCalendar.addDecorators(sundayDecorator, saturdayDecorator, boldDecorator, minMaxDecorator, todayDecorator)
 
+
+
+
+        binding.habitbt.setOnClickListener({
+            val intent = Intent(this, HabitActivity::class.java)
+            startActivity(intent)
+        })
     }
 }
