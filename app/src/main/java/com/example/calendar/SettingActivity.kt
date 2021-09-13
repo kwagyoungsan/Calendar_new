@@ -3,15 +3,16 @@ package com.example.calendar
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.calendar.databinding.HabitLayoutBinding
+import com.example.calendar.databinding.SettingLayoutBinding
 
-class HabitActivity : AppCompatActivity() {
-    private var mBinding: HabitLayoutBinding? = null
+
+class SettingActivity : AppCompatActivity() {
+    private var mBinding: SettingLayoutBinding? = null
     private val binding get() = mBinding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = HabitLayoutBinding.inflate(layoutInflater)
+        mBinding = SettingLayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.menubt.setOnClickListener {

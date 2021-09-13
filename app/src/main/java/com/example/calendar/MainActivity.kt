@@ -52,10 +52,30 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        binding.habitbt.setOnClickListener({
-            layoutInflater
+        binding.menubt.setOnClickListener {
             val intent = Intent(this, HabitActivity::class.java)
             startActivity(intent)
-        })
+        }
+
+        binding.calendarbt.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.habitbt.setOnClickListener {
+            val intent = Intent(this, HabitActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.settingbt.setOnClickListener {
+            val intent = Intent(this, SettingActivity::class.java)
+            startActivity(intent)
+        }
+
+    }
+
+    override fun onDestroy() {
+        mBinding = null
+        super.onDestroy()
     }
 }

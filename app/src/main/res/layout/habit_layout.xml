@@ -6,18 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical">
-    <data>
-        variable name="activity"
-        type="net.ienlab.timer.MainActivity" />
-    </data>
+<!--    <data>-->
+<!--        variable name="activity"-->
+<!--        type="net.ienlab.timer.HabitActivity" />-->
+<!--    </data>-->
 
 
-    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-        android:id="@+id/materialCalendar"
-        app:mcv_selectionColor="#d2d2d2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"/>
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
+
     <!--    <View-->
     <!--        android:id="@+id/today"-->
     <!--        android:layout_width="80dp"-->
@@ -43,25 +39,29 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/menu_bt"
+            android:id="@+id/menubt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:text="menu"/>
         <Button
-            android:id="@+id/calendar_bt"
+            android:id="@+id/calendarbt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:text="calendar"/>
         <Button
-            android:id="@+id/habit_bt"
+            android:id="@+id/habitbt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:text="habit"/>
         <Button
-            android:id="@+id/setting_bt"
+            android:id="@+id/settingbt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:text="setting"/>
 
     </LinearLayout>
 </LinearLayout>
