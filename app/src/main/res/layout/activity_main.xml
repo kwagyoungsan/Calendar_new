@@ -48,6 +48,7 @@
             android:layout_weight="1"
             android:drawableTop="@drawable/ic_baseline_menu_24"
             android:text="menu"
+            android:textSize="12sp"
             app:iconPadding="0dp" />
 
         <Button
@@ -58,7 +59,7 @@
             android:layout_weight="1"
             android:drawableTop="@drawable/ic_baseline_calendar_today_24"
             android:text="calendar"
-            android:textSize="13sp"
+            android:textSize="12sp"
             app:iconPadding="0dp" />
 
         <Button
@@ -69,6 +70,7 @@
             android:layout_weight="1"
             android:drawableTop="@drawable/ic_baseline_access_time_24"
             android:text="habit"
+            android:textSize="12sp"
             app:iconPadding="0dp" />
 
         <Button
@@ -79,6 +81,7 @@
             android:layout_weight="1"
             android:drawableTop="@drawable/ic_baseline_settings_24"
             android:text="setting"
+            android:textSize="12sp"
             app:iconPadding="0dp" />
 
     </LinearLayout>

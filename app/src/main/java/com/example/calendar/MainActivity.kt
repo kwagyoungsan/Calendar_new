@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var actionBar : ActionBar?
+        var actionBar: ActionBar?
         val startTimeCalendar: Calendar = Calendar.getInstance()
         val endTimeCalendar: Calendar = Calendar.getInstance()
 
@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         val currentMonth = startTimeCalendar.get(Calendar.MONTH)
         val currentDate = startTimeCalendar.get(Calendar.DATE)
 
-        val materialCalendar : MaterialCalendarView = findViewById(R.id.materialCalendar)
+        val materialCalendar: MaterialCalendarView = findViewById(R.id.materialCalendar)
 
         actionBar = supportActionBar
         actionBar?.hide()
@@ -36,14 +36,24 @@ class MainActivity : AppCompatActivity() {
         materialCalendar.state().edit()
             .setFirstDayOfWeek(Calendar.SUNDAY)
             .setMinimumDate(CalendarDay.from(currentYear, currentMonth, 1))
-            .setMaximumDate(CalendarDay.from(currentYear, currentMonth+3, endTimeCalendar.getActualMaximum(Calendar.DAY_OF_MONTH)))
+            .setMaximumDate(
+                CalendarDay.from(
+                    currentYear,
+                    currentMonth + 3,
+                    endTimeCalendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+                )
+            )
             .setCalendarDisplayMode(CalendarMode.MONTHS)
             .commit()
 
-        endTimeCalendar.set(Calendar.MONTH, currentMonth+3)
+        endTimeCalendar.set(Calendar.MONTH, currentMonth + 3)
 
         val stCalendarDay = CalendarDay(currentYear, currentMonth, currentDate)
-        val enCalendarDay = CalendarDay(endTimeCalendar.get(Calendar.YEAR), endTimeCalendar.get(Calendar.MONTH), endTimeCalendar.get(Calendar.DATE))
+        val enCalendarDay = CalendarDay(
+            endTimeCalendar.get(Calendar.YEAR),
+            endTimeCalendar.get(Calendar.MONTH),
+            endTimeCalendar.get(Calendar.DATE)
+        )
 
         val sundayDecorator = SundayDecorator()
         val saturdayDecorator = SaturdayDecorator()
@@ -51,35 +61,44 @@ class MainActivity : AppCompatActivity() {
         val boldDecorator = BoldDecorator(stCalendarDay, enCalendarDay)
         val todayDecorator = TodayDecorator(this)
 
-        materialCalendar.addDecorators(sundayDecorator, saturdayDecorator, boldDecorator, minMaxDecorator, todayDecorator)
+        materialCalendar.addDecorators(
+            sundayDecorator,
+            saturdayDecorator,
+            boldDecorator,
+            minMaxDecorator,
+            todayDecorator
+        )
 
-        fun ShowTabOne(){
+        fun ShowTabOne() {
             val transaction = manager.beginTransaction()
             val fragment = MenuFragment()
-            transaction.replace(R.id.fragment_holder, fragment)
+            transaction.replace(R.id.menuFragment, fragment)
             transaction.addToBackStack(null)
             transaction.commit()
         }
 
 
+        binding.menubt.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("Key", "Hello FragmentA")
+            ShowTabOne()
 
 
+            binding.calendarbt.setOnClickListener {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
 
-        binding.calendarbt.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            binding.habitbt.setOnClickListener {
+                val intent = Intent(this, HabitActivity::class.java)
+                startActivity(intent)
+            }
+
+            binding.settingbt.setOnClickListener {
+                val intent = Intent(this, SettingActivity::class.java)
+                startActivity(intent)
+            }
         }
-
-        binding.habitbt.setOnClickListener {
-            val intent = Intent(this, HabitActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.settingbt.setOnClickListener {
-            val intent = Intent(this, SettingActivity::class.java)
-            startActivity(intent)
-        }
-
     }
 
     override fun onDestroy() {
