@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
     <com.prolificinteractive.materialcalendarview.MaterialCalendarView
         android:id="@+id/materialCalendar"
-        app:mcv_selectionColor="#d2d2d2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"/>
+        android:orientation="horizontal"
+        app:mcv_selectionColor="#d2d2d2" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -22,46 +23,63 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
-<!--    <View-->
-<!--        android:id="@+id/today"-->
-<!--        android:layout_width="80dp"-->
-<!--        android:layout_height="80dp"-->
-<!--        android:background="@drawable/style_only_radius_10"/>-->
+    <!--    <View-->
+    <!--        android:id="@+id/today"-->
+    <!--        android:layout_width="80dp"-->
+    <!--        android:layout_height="80dp"-->
+    <!--        android:background="@drawable/style_only_radius_10"/>-->
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:weightSum="4">
 
         <Button
             android:id="@+id/menubt"
-            android:layout_width="wrap_content"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="menu"/>
+            android:drawableTop="@drawable/ic_baseline_menu_24"
+            android:text="menu"
+            app:iconPadding="0dp" />
 
         <Button
             android:id="@+id/calendarbt"
-            android:layout_width="wrap_content"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="calendar"/>
+            android:drawableTop="@drawable/ic_baseline_calendar_today_24"
+            android:text="calendar"
+            android:textSize="13sp"
+            app:iconPadding="0dp" />
+
         <Button
             android:id="@+id/habitbt"
-            android:layout_width="wrap_content"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="habit"/>
+            android:drawableTop="@drawable/ic_baseline_access_time_24"
+            android:text="habit"
+            app:iconPadding="0dp" />
+
         <Button
             android:id="@+id/settingbt"
-            android:layout_width="wrap_content"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="setting"/>
+            android:drawableTop="@drawable/ic_baseline_settings_24"
+            android:text="setting"
+            app:iconPadding="0dp" />
 
     </LinearLayout>
 </LinearLayout>

@@ -2,6 +2,7 @@ package com.example.calendar
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.calendar.databinding.HabitLayoutBinding
 
@@ -13,6 +14,11 @@ class HabitActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = HabitLayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        var actionBar : ActionBar?
+
+        actionBar = supportActionBar
+        actionBar?.hide()
 
         binding.menubt.setOnClickListener {
             val intent = Intent(this, HabitActivity::class.java)

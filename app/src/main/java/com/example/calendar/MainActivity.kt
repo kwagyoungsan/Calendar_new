@@ -3,6 +3,7 @@ package com.example.calendar
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.ActionBar
 import com.example.calendar.databinding.ActivityMainBinding
 import com.prolificinteractive.materialcalendarview.*
 import java.util.Calendar
@@ -12,14 +13,14 @@ class MainActivity : AppCompatActivity() {
     private var mBinding: ActivityMainBinding? = null
     private val binding get() = mBinding!!
 
-
+    val manager = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+        var actionBar : ActionBar?
         val startTimeCalendar: Calendar = Calendar.getInstance()
         val endTimeCalendar: Calendar = Calendar.getInstance()
 
@@ -28,6 +29,9 @@ class MainActivity : AppCompatActivity() {
         val currentDate = startTimeCalendar.get(Calendar.DATE)
 
         val materialCalendar : MaterialCalendarView = findViewById(R.id.materialCalendar)
+
+        actionBar = supportActionBar
+        actionBar?.hide()
 
         materialCalendar.state().edit()
             .setFirstDayOfWeek(Calendar.SUNDAY)
@@ -49,13 +53,17 @@ class MainActivity : AppCompatActivity() {
 
         materialCalendar.addDecorators(sundayDecorator, saturdayDecorator, boldDecorator, minMaxDecorator, todayDecorator)
 
-
-
-
-        binding.menubt.setOnClickListener {
-            val intent = Intent(this, HabitActivity::class.java)
-            startActivity(intent)
+        fun ShowTabOne(){
+            val transaction = manager.beginTransaction()
+            val fragment = MenuFragment()
+            transaction.replace(R.id.fragment_holder, fragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
         }
+
+
+
+
 
         binding.calendarbt.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
