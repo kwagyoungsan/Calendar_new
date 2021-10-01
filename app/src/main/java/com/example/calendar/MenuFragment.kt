@@ -27,12 +27,8 @@ class MenuFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val TAG:String = "MenuFragment : "
-        Log.e(TAG, "Log ----- MenuFragment")
         val binding = FragmentMenuBinding.inflate(inflater, container, false)
-        Log.e(TAG, "Log ----- binding : "+binding)
         binding.textView.text = arguments?.getString("Key")
-        Log.e(TAG, "Log ----- key : "+binding.textView.text)
         return binding.root
 
     }

@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         val materialCalendar: MaterialCalendarView = findViewById(R.id.materialCalendar)
 
-        val VIEW1: FrameLayout = findViewById(R.id.view)
+//        val VIEW1: FrameLayout = findViewById(R.id.view)
 
         actionBar = supportActionBar
         actionBar?.hide()
@@ -73,25 +73,18 @@ class MainActivity : AppCompatActivity() {
         )
 
         binding.menubt.setOnClickListener {
-            val TAG:String = "MainActivity : "
-            Log.e(TAG, "Log ----- MainActivity")
-
             val bundle = Bundle()
-            Log.e(TAG, "Log ----- bundle : "+bundle)
+            val menuFragment = MenuFragment()
+            val transaction = supportFragmentManager.beginTransaction()
+
             bundle.putString("Key", "Hello MenuFragment")
 
-
-            val menuFragment = MenuFragment()
             menuFragment.arguments = bundle
-            val transaction = supportFragmentManager.beginTransaction()
-            Log.e(TAG, "Log ----- transaction : "+transaction)
+            binding.materialCalendar.setVisibility(View.GONE);
+            binding.a1.setVisibility(View.GONE);
             transaction.replace(R.id.view, menuFragment)
-            Log.e(TAG, "Log ----- transaction : "+transaction)
+
             transaction.commit()
-            Log.e(TAG, "Log ----- transaction : "+transaction)
-//            binding.materialCalendar.visibility = View.INVISIBLE
-//            binding.a1.visibility = View.INVISIBLE
-//            binding.a2.visibility = View.INVISIBLE
 
         }
 
