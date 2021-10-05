@@ -6,10 +6,53 @@
     tools:context=".MenuFragment"
     android:id="@+id/menuFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/textView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/calendarbt_menu"
+            style="@style/Widget.AppCompat.Button"
+            android:text="calendar"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/habitbt_menu"
+            style="@style/Widget.AppCompat.Button"
+            android:text="habit"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/communitybt_menu"
+            style="@style/Widget.AppCompat.Button"
+            android:text="community"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/settingbt_menu"
+            style="@style/Widget.AppCompat.Button"
+            android:text="setting"/>
+
+        <LinearLayout
+            android:id="@+id/blank"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:layout_gravity="center"
+            android:src="@drawable/kakao_login_medium_wide" />
+
+    </LinearLayout>
 
 </FrameLayout>

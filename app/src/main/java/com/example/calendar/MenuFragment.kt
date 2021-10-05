@@ -28,7 +28,7 @@ class MenuFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentMenuBinding.inflate(inflater, container, false)
-        binding.textView.text = arguments?.getString("Key")
+//        binding.textView.text = arguments?.getString("Key")
         return binding.root
 
     }

@@ -10,7 +10,7 @@ import com.prolificinteractive.materialcalendarview.*
 import java.util.Calendar
 import android.util.Log
 import android.widget.FrameLayout
-
+import com.kakao.sdk.common.util.Utility
 
 class MainActivity : AppCompatActivity() {
     private var mBinding: ActivityMainBinding? = null
@@ -30,6 +30,11 @@ class MainActivity : AppCompatActivity() {
         val currentDate = startTimeCalendar.get(Calendar.DATE)
 
         val materialCalendar: MaterialCalendarView = findViewById(R.id.materialCalendar)
+
+
+        val keyHash = Utility.getKeyHash(this)
+        Log.d("Hash", keyHash)
+
 
 //        val VIEW1: FrameLayout = findViewById(R.id.view)
 
@@ -73,15 +78,16 @@ class MainActivity : AppCompatActivity() {
         )
 
         binding.menubt.setOnClickListener {
-            val bundle = Bundle()
+//            val bundle = Bundle()
             val menuFragment = MenuFragment()
             val transaction = supportFragmentManager.beginTransaction()
 
-            bundle.putString("Key", "Hello MenuFragment")
+//            bundle.putString("Key", "Hello MenuFragment")
 
-            menuFragment.arguments = bundle
+//            menuFragment.arguments = bundle
             binding.materialCalendar.setVisibility(View.GONE);
-            binding.a1.setVisibility(View.GONE);
+            binding.blank.setVisibility(View.GONE);
+            binding.menuwindow.setVisibility(View.GONE);
             transaction.replace(R.id.view, menuFragment)
 
             transaction.commit()
