@@ -12,6 +12,7 @@ import android.util.Log
 import android.widget.FrameLayout
 import com.kakao.sdk.common.util.Utility
 
+
 class MainActivity : AppCompatActivity() {
     private var mBinding: ActivityMainBinding? = null
     private val binding get() = mBinding!!
