@@ -1,5 +1,6 @@
 package com.example.calendar
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -41,14 +42,21 @@ class MenuFragment : Fragment() {
         val binding = FragmentMenuBinding.inflate(inflater, container, false)
 //        binding.textView.text = arguments?.getString("Key")
 
+
+
         UserApiClient.instance.accessTokenInfo { tokenInfo, error ->
             if (error != null) {
                 Toast.makeText(context, "토큰 정보 보기 실패", Toast.LENGTH_SHORT).show()
             } else if (tokenInfo != null) {
                 Toast.makeText(context, "토큰 정보 보기 성공", Toast.LENGTH_SHORT).show()
+                Log.i(
+                    tag, "토큰 정보 보기 성공" + "\n회원번호 : ${tokenInfo.id}" +
+                            "\n만료시간: ${tokenInfo.expiresIn} 초"
+                )
                 val intent = Intent(context, MainActivity::class.java)
                 startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
-                System.exit(0)
+
+
             }
         }
 
@@ -76,12 +84,7 @@ class MenuFragment : Fragment() {
                         Toast.makeText(mainActivity, "유효하지 않은 scope ID", Toast.LENGTH_SHORT).show()
                     }
                     error.toString() == Misconfigured.toString() -> {
-                        Toast.makeText(
-                            mainActivity,
-                            "설정이 올바르지 않음(android key hash)",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
+                        Toast.makeText(mainActivity,"설정이 올바르지 않음(android key hash)",Toast.LENGTH_SHORT).show()
                     }
                     error.toString() == ServerError.toString() -> {
                         Toast.makeText(mainActivity, "서버 내부 에러", Toast.LENGTH_SHORT).show()
@@ -102,6 +105,24 @@ class MenuFragment : Fragment() {
             }
         }
 
+        UserApiClient.instance.me { user, error ->
+            if (error != null) {
+                Log.e(TAG, "사용자 정보 요청 실패", error)
+            } else if (user != null) {
+                Log.i(
+                    TAG, "사용자 정보 요청 성공" +
+                            "\n회원번호: ${user.id}" +
+                            "\n이메일: ${user.kakaoAccount?.email}" +
+                            "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
+                            "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}"
+                )
+            }
+        }
+
+        UserApiClient.instance.me{user, error->
+            binding.test123.text="닉네임: ${user?.kakaoAccount?.profile?.nickname}"
+        }
+
         binding.kakaoLoginbt.setOnClickListener {
             if (LoginClient.instance.isKakaoTalkLoginAvailable(mainActivity)) {
                 LoginClient.instance.loginWithKakaoTalk(mainActivity, callback = callback)
@@ -111,6 +132,7 @@ class MenuFragment : Fragment() {
         }
 
         return binding.root
+
 
     }
 
