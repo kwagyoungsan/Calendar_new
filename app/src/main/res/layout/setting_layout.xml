@@ -49,12 +49,19 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 />
 
+            <ImageButton
+                android:id="@+id/kakao_loginbt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FFFFFF"
+                android:layout_gravity="center"
+                android:src="@drawable/kakao_login_medium_wide" />
+
 
             <LinearLayout
                 android:id="@+id/menuwindow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="50dp"
                 android:weightSum="4">
 
                 <Button

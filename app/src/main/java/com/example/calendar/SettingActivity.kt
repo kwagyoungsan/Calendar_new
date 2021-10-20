@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.calendar.databinding.SettingLayoutBinding
 import com.kakao.sdk.user.UserApiClient
 
-
 class SettingActivity : AppCompatActivity() {
     private var mBinding: SettingLayoutBinding? = null
     private val binding get() = mBinding!!

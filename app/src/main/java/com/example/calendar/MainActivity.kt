@@ -33,8 +33,8 @@ class MainActivity : AppCompatActivity() {
         val materialCalendar: MaterialCalendarView = findViewById(R.id.materialCalendar)
 
 
-        val keyHash = Utility.getKeyHash(this)
-        Log.d("Hash", keyHash)
+//        val keyHash = Utility.getKeyHash(this)
+//        Log.d("Hash", keyHash)
 
 
 //        val VIEW1: FrameLayout = findViewById(R.id.view)
@@ -77,6 +77,8 @@ class MainActivity : AppCompatActivity() {
             minMaxDecorator,
             todayDecorator
         )
+
+
 
         binding.menubt.setOnClickListener {
 //            val bundle = Bundle()
