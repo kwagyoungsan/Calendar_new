@@ -21,12 +21,12 @@ class HabitActivity : AppCompatActivity() {
         actionBar?.hide()
 
         binding.menubt.setOnClickListener {
-            val intent = Intent(this, HabitActivity::class.java)
+            val intent = Intent(this, MenuFragment::class.java)
             startActivity(intent)
         }
 
         binding.calendarbt.setOnClickListener {
-            val intent = Intent(this, HabitActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 
@@ -35,10 +35,6 @@ class HabitActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.settingbt.setOnClickListener {
-            val intent = Intent(this, HabitActivity::class.java)
-            startActivity(intent)
-        }
     }
 
     override fun onDestroy() {

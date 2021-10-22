@@ -106,11 +106,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, HabitActivity::class.java)
             startActivity(intent)
         }
-
-        binding.settingbt.setOnClickListener {
-            val intent = Intent(this, SettingActivity::class.java)
-            startActivity(intent)
-        }
     }
 
 
