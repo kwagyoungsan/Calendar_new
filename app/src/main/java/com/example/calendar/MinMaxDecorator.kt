@@ -16,6 +16,7 @@ class MinMaxDecorator(min:CalendarDay, max:CalendarDay):DayViewDecorator {
     }
     override fun decorate(view: DayViewFacade?) {
         view?.addSpan(object:ForegroundColorSpan(Color.parseColor("#000000")){})
-        view?.setDaysDisabled(true)
+
+//        view?.setDaysDisabled(true)   // 선택 불가능하게 하는 것
     }
 }

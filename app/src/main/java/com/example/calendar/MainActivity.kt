@@ -1,16 +1,16 @@
 package com.example.calendar
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import com.example.calendar.databinding.ActivityMainBinding
-import com.prolificinteractive.materialcalendarview.*
-import java.util.Calendar
-import android.util.Log
-import android.widget.FrameLayout
-import com.kakao.sdk.common.util.Utility
+import com.prolificinteractive.materialcalendarview.CalendarDay
+import com.prolificinteractive.materialcalendarview.CalendarMode
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -48,34 +48,35 @@ class MainActivity : AppCompatActivity() {
             .setMaximumDate(
                 CalendarDay.from(
                     currentYear,
-                    currentMonth + 3,
+                    currentMonth + 3, //여기 숫자로 언제까지 달력을 보여줄지 바꿀 수 있음
                     endTimeCalendar.getActualMaximum(Calendar.DAY_OF_MONTH)
                 )
             )
             .setCalendarDisplayMode(CalendarMode.MONTHS)
             .commit()
 
-        endTimeCalendar.set(Calendar.MONTH, currentMonth + 3)
+        endTimeCalendar.set(Calendar.MONTH, currentMonth + 3) //여기 숫자로 언제까지 달력을 보여줄지 바꿀 수 있음
 
-        val stCalendarDay = CalendarDay(currentYear, currentMonth, currentDate)
+        val stCalendarDay = CalendarDay(currentYear, currentMonth, (currentDate)-(currentDate-1))
         val enCalendarDay = CalendarDay(
             endTimeCalendar.get(Calendar.YEAR),
             endTimeCalendar.get(Calendar.MONTH),
-            endTimeCalendar.get(Calendar.DATE)
-        )
+            endTimeCalendar.get(Calendar.DATE))
 
         val sundayDecorator = SundayDecorator()
         val saturdayDecorator = SaturdayDecorator()
         val minMaxDecorator = MinMaxDecorator(stCalendarDay, enCalendarDay)
         val boldDecorator = BoldDecorator(stCalendarDay, enCalendarDay)
         val todayDecorator = TodayDecorator(this)
+        val eventDecorator = EventDecorator(Color.RED,Collections.singleton(CalendarDay.today()))
 
         materialCalendar.addDecorators(
             sundayDecorator,
             saturdayDecorator,
             boldDecorator,
             minMaxDecorator,
-            todayDecorator
+            todayDecorator,
+            eventDecorator
         )
 
 
