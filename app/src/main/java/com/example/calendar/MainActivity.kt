@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.calendar.databinding.ActivityMainBinding
@@ -42,20 +43,20 @@ class MainActivity : AppCompatActivity() {
         actionBar = supportActionBar
         actionBar?.hide()
 
+        endTimeCalendar.set(Calendar.MONTH, currentMonth) //여기 숫자로 언제까지 달력을 보여줄지 바꿀 수 있음
+
         materialCalendar.state().edit()
             .setFirstDayOfWeek(Calendar.SUNDAY)
-            .setMinimumDate(CalendarDay.from(currentYear, currentMonth, 1))
+            .setMinimumDate(CalendarDay.from(currentYear-1, currentMonth, 1))
             .setMaximumDate(
-                CalendarDay.from(
-                    currentYear,
-                    currentMonth + 3, //여기 숫자로 언제까지 달력을 보여줄지 바꿀 수 있음
+                CalendarDay.from(currentYear+1,currentMonth, //여기 숫자로 언제까지 달력을 보여줄지 바꿀 수 있음
                     endTimeCalendar.getActualMaximum(Calendar.DAY_OF_MONTH)
                 )
             )
             .setCalendarDisplayMode(CalendarMode.MONTHS)
             .commit()
 
-        endTimeCalendar.set(Calendar.MONTH, currentMonth + 3) //여기 숫자로 언제까지 달력을 보여줄지 바꿀 수 있음
+
 
         val stCalendarDay = CalendarDay(currentYear, currentMonth, (currentDate)-(currentDate-1))
         val enCalendarDay = CalendarDay(
@@ -112,7 +113,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         mBinding = null
-
+        Toast.makeText(this, "사라짐", Toast.LENGTH_LONG).show()
         super.onDestroy()
     }
 }
