@@ -6,7 +6,7 @@ import android.text.style.ForegroundColorSpan
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
-
+//오늘 날짜 색깔
 class TodayDecorator(context: Context): DayViewDecorator {
     private var date = CalendarDay.today()
 
@@ -17,3 +17,4 @@ class TodayDecorator(context: Context): DayViewDecorator {
         view?.addSpan(object: ForegroundColorSpan(Color.GREEN){})
     }
 }
+

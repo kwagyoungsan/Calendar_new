@@ -6,7 +6,7 @@ import android.text.style.StyleSpan
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
-
+//굵은 글씨
 class BoldDecorator(min:CalendarDay, max:CalendarDay):DayViewDecorator {
     val maxDay = max
     val minDay = min

@@ -6,7 +6,7 @@ import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
 import java.util.*
-
+//일요일
 class SundayDecorator: DayViewDecorator {
     private val calendar = Calendar.getInstance()
     override fun shouldDecorate(day: CalendarDay?): Boolean {

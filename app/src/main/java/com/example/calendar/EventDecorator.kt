@@ -5,7 +5,7 @@ import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
 import com.prolificinteractive.materialcalendarview.spans.DotSpan
-
+// 밑에 점
 class EventDecorator(
     private val color: Int,
     private val dates: Set<CalendarDay>

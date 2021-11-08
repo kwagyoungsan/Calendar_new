@@ -70,14 +70,14 @@ class MainActivity : AppCompatActivity() {
         val sundayDecorator = SundayDecorator()
         val saturdayDecorator = SaturdayDecorator()
         val minMaxDecorator = MinMaxDecorator(stCalendarDay, enCalendarDay)
-        val boldDecorator = BoldDecorator(stCalendarDay, enCalendarDay)
+//        val boldDecorator = BoldDecorator(stCalendarDay, enCalendarDay)
         val todayDecorator = TodayDecorator(this)
         val eventDecorator = EventDecorator(Color.RED, Collections.singleton(CalendarDay.today()))
 
         materialCalendar.addDecorators(
             sundayDecorator,
             saturdayDecorator,
-            boldDecorator,
+//            boldDecorator,
             minMaxDecorator,
             todayDecorator,
             eventDecorator
