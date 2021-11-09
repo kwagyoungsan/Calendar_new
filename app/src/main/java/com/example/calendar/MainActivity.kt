@@ -33,12 +33,8 @@ class MainActivity : AppCompatActivity() {
 
         val materialCalendar: MaterialCalendarView = findViewById(R.id.materialCalendar)
 
-
 //        val keyHash = Utility.getKeyHash(this)
 //        Log.d("Hash", keyHash)
-
-
-//        val VIEW1: FrameLayout = findViewById(R.id.view)
 
         actionBar = supportActionBar
         actionBar?.hide()
@@ -47,9 +43,10 @@ class MainActivity : AppCompatActivity() {
 
         materialCalendar.state().edit()
             .setFirstDayOfWeek(Calendar.SUNDAY)
-            .setMinimumDate(CalendarDay.from(currentYear-1, currentMonth, 1))
+            .setMinimumDate(CalendarDay.from(currentYear - 1, currentMonth, 1))
             .setMaximumDate(
-                CalendarDay.from(currentYear+1,currentMonth, //여기 숫자로 언제까지 달력을 보여줄지 바꿀 수 있음
+                CalendarDay.from(
+                    currentYear + 1, currentMonth, //여기 숫자로 언제까지 달력을 보여줄지 바꿀 수 있음
                     endTimeCalendar.getActualMaximum(Calendar.DAY_OF_MONTH)
                 )
             )
@@ -57,19 +54,20 @@ class MainActivity : AppCompatActivity() {
             .commit()
 
 
-
-        val stCalendarDay = CalendarDay(currentYear, currentMonth, (currentDate)-(currentDate-1))
+        val stCalendarDay =
+            CalendarDay(currentYear, currentMonth, (currentDate) - (currentDate - 1))
         val enCalendarDay = CalendarDay(
             endTimeCalendar.get(Calendar.YEAR),
             endTimeCalendar.get(Calendar.MONTH),
-            endTimeCalendar.get(Calendar.DATE))
+            endTimeCalendar.get(Calendar.DATE)
+        )
 
         val sundayDecorator = SundayDecorator()
         val saturdayDecorator = SaturdayDecorator()
         val minMaxDecorator = MinMaxDecorator(stCalendarDay, enCalendarDay)
         val boldDecorator = BoldDecorator(stCalendarDay, enCalendarDay)
         val todayDecorator = TodayDecorator(this)
-        val eventDecorator = EventDecorator(Color.RED,Collections.singleton(CalendarDay.today()))
+        val eventDecorator = EventDecorator(Color.RED, Collections.singleton(CalendarDay.today()))
 
         materialCalendar.addDecorators(
             sundayDecorator,
@@ -80,23 +78,19 @@ class MainActivity : AppCompatActivity() {
             eventDecorator
         )
 
-
-
         binding.menubt.setOnClickListener {
 //            val bundle = Bundle()
             val menuFragment = MenuFragment()
             val transaction = supportFragmentManager.beginTransaction()
 
 //            bundle.putString("Key", "Hello MenuFragment")
-
 //            menuFragment.arguments = bundle
+
             binding.materialCalendar.setVisibility(View.GONE);
             binding.blank.setVisibility(View.GONE);
             binding.menuwindow.setVisibility(View.GONE);
             transaction.replace(R.id.view, menuFragment)
-
             transaction.commit()
-
         }
 
         binding.calendarbt.setOnClickListener {
@@ -109,7 +103,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
 
     override fun onDestroy() {
         mBinding = null
