@@ -31,6 +31,18 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/addschwindow"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/addschbt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="일정 추가"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/menuwindow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

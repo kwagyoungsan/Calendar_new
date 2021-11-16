@@ -29,13 +29,6 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/communitybt_menu"
-            style="@style/Widget.AppCompat.Button"
-            android:text="community"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/settingbt_menu"
             style="@style/Widget.AppCompat.Button"
             android:text="setting"/>

@@ -10,22 +10,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="제목"
         android:layout_marginBottom="5dp"/>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="시작 시간"
         android:layout_marginBottom="5dp"/>
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="종료 시간" />
 </LinearLayout>
