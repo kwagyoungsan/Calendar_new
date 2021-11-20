@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.annotation.MainThread
+import androidx.fragment.app.DialogFragment
 import com.example.calendar.databinding.FragmentScheduleBinding
 import com.kakao.sdk.auth.LoginClient
 import com.kakao.sdk.auth.model.OAuthToken
@@ -19,9 +20,9 @@ import com.kakao.sdk.common.model.AuthErrorCause.*
 import com.kakao.sdk.user.UserApiClient
 
 
-class ScheduleFragment : Fragment() {
+class ScheduleFragment : DialogFragment() {
     lateinit var mainActivity: MainActivity
-
+    private lateinit var binding: FragmentScheduleBinding
 
 
 
@@ -33,9 +34,7 @@ class ScheduleFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-
-        }
+        isCancelable = false
     }
 
     override fun onCreateView(
@@ -44,12 +43,8 @@ class ScheduleFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentScheduleBinding.inflate(inflater, container, false)
-//        binding.textView.text = arguments?.getString("Key")
-
 
         return binding.root
-
-
     }
 
     companion object {

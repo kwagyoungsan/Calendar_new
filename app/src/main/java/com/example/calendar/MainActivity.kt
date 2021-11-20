@@ -1,16 +1,21 @@
 package com.example.calendar
 
+import android.app.AlertDialog
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.DatePicker
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.calendar.databinding.ActivityMainBinding
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.CalendarMode
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -78,15 +83,7 @@ class MainActivity : AppCompatActivity() {
             eventDecorator
         )
         binding.addschbt.setOnClickListener{
-            val scheduleFragment = ScheduleFragment()
-            val transaction = supportFragmentManager.beginTransaction()
 
-            binding.materialCalendar.setVisibility(View.GONE);
-            binding.blank.setVisibility(View.GONE);
-            binding.menuwindow.setVisibility(View.GONE);
-            binding.addschwindow.setVisibility(View.GONE);
-            transaction.replace(R.id.view, scheduleFragment)
-            transaction.commit()
         }
 
         binding.menubt.setOnClickListener {
