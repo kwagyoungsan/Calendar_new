@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.annotation.MainThread
@@ -43,6 +44,18 @@ class ScheduleFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentScheduleBinding.inflate(inflater, container, false)
+
+        val ampm = resources.getStringArray(R.array.spinner_ampm)
+        val hour = resources.getStringArray(R.array.spinner_hour)
+        val minute = resources.getStringArray(R.array.spinner_minute)
+
+        val adapter_ampm = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, ampm)
+        val adapter_hour = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, hour)
+        val adapter_min = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, minute)
+
+        binding.spinnerAmpm.adapter = adapter_ampm
+        binding.spinnerHour.adapter = adapter_hour
+        binding.spinnerMin.adapter = adapter_min
 
         return binding.root
     }

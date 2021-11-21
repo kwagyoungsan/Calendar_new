@@ -10,49 +10,69 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="계획 추가" />
+        android:text="계획 추가"
+        android:textSize="30sp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:layout_marginTop="20dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
 
         <Switch
             android:id="@+id/switch1"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-
-            android:text="요일 반복" />
+            android:text="요일 반복"
+            android:textSize="15sp"
+            android:layout_marginLeft="20dp"/>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="계획" />
+            android:gravity="center"
+            android:text="계획"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="20dp"/>
 
         <EditText
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:hint="내용을 입력해주세요." />
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:hint="내용을 입력해주세요."
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="20dp"/>
 
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="요일 선택" />
+        android:text="요일 선택"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <com.nex3z.togglebuttongroup.MultiSelectToggleGroup
             android:id="@+id/group_choices"
@@ -61,15 +81,16 @@
             app:tbgCheckedButton="@+id/choice_a"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/libraryTv">
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toBottomOf="@+id/libraryTv"
+            android:gravity="center">
 
             <com.nex3z.togglebuttongroup.button.CircularToggle
                 android:id="@+id/sunday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="일" />
+                android:text="일"/>
 
             <com.nex3z.togglebuttongroup.button.CircularToggle
                 android:id="@+id/monday"
@@ -118,21 +139,30 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="시간 선택" />
+        android:text="시간 선택"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
 
         <Spinner
+            android:id="@+id/spinner_ampm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/ic_baseline_arrow_drop_down_24"
             android:popupBackground="@drawable/edittext_design"
+
             />
 
         <Spinner
+            android:id="@+id/spinner_hour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/ic_baseline_arrow_drop_down_24"
@@ -144,6 +174,7 @@
             android:text="시"/>
 
         <Spinner
+            android:id="@+id/spinner_min"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/ic_baseline_arrow_drop_down_24"
@@ -156,23 +187,37 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/blank"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_gravity="center">
 
         <Button
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:background="#d3d3d3"
             android:text="취소"
-            android:textColor="@color/white"/>
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:layout_marginRight="50dp"
+            android:popupBackground="@drawable/edittext_design"/>
 
         <Button
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:background="#d3d3d3"
             android:text="확인"
-            android:textColor="@color/white" />
+            android:textSize="15sp"
+            android:textColor="@color/black" />
 
     </LinearLayout>
 </LinearLayout>
