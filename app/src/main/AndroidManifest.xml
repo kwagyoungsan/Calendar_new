@@ -36,9 +36,5 @@
             </intent-filter>
         </activity>
         <activity android:name=".HabitActivity" />
-
-
     </application>
-
-
 </manifest>

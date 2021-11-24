@@ -29,6 +29,22 @@
         <!-- 취소/확인버튼 색상 -->
         <item name="android:textColor">@color/black</item>
     </style>
+
+    <style name="mytoast">
+        <item name="stTextBold">true</item>
+        <item name="stTextColor">#fff</item>
+<!--        <item name="stFont">@font/retrofont</item>-->
+        <item name="stTextSize">14sp</item>
+        <item name="stColorBackground">#fff</item>
+        <item name="stSolidBackground">true</item>
+        <item name="stStrokeWidth">3dp</item>
+        <item name="stStrokeColor">#fff</item>
+<!--        <item name="stIconStart">@drawable/ic</item>-->
+<!--        <item name="stIconEnd">@drawable/ic</item>-->
+        <item name="stLength">LONG</item> LONG or SHORT
+        <item name="stGravity">top</item> top or center
+        <item name="stRadius">5dp</item>
+    </style>
 </resources>
 
 

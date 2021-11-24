@@ -3,13 +3,13 @@
     <item>
         <layer-list>
             <item
-                android:drawable="@drawable/edittext_design"/>
+                android:drawable="@drawable/edittext_design"
+                />
             <item
                 android:drawable="@drawable/ic_baseline_arrow_drop_down_24"
-                android:gravity="center|end"
-                android:width="10dp"
-                android:right="10dp"
-                android:height="10dp"/>
+                android:width="20dp"
+                android:right="20dp"
+                android:height="20dp"/>
         </layer-list>
     </item>
 </selector>

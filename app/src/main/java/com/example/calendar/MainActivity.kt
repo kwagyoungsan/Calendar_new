@@ -83,17 +83,25 @@ class MainActivity : AppCompatActivity() {
             eventDecorator
         )
         binding.addschbt.setOnClickListener{
+            val scheduleFragment = ScheduleFragment()
+            val transaction = supportFragmentManager.beginTransaction()
 
+            binding.materialCalendar.setVisibility(View.GONE)
+            binding.blank.setVisibility(View.GONE)
+            binding.menuwindow.setVisibility(View.GONE)
+            binding.addschwindow.setVisibility(View.GONE)
+            transaction.replace(R.id.view, scheduleFragment)
+            transaction.commit()
         }
 
         binding.menubt.setOnClickListener {
             val menuFragment = MenuFragment()
             val transaction = supportFragmentManager.beginTransaction()
 
-            binding.materialCalendar.setVisibility(View.GONE);
-            binding.blank.setVisibility(View.GONE);
-            binding.menuwindow.setVisibility(View.GONE);
-            binding.addschwindow.setVisibility(View.GONE);
+            binding.materialCalendar.setVisibility(View.GONE)
+            binding.blank.setVisibility(View.GONE)
+            binding.menuwindow.setVisibility(View.GONE)
+            binding.addschwindow.setVisibility(View.GONE)
             transaction.replace(R.id.view, menuFragment)
             transaction.commit()
         }

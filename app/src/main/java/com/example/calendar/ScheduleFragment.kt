@@ -3,6 +3,7 @@ package com.example.calendar
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -19,6 +20,7 @@ import com.kakao.sdk.auth.LoginClient
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause.*
 import com.kakao.sdk.user.UserApiClient
+import io.github.muddz.styleabletoast.StyleableToast
 
 
 class ScheduleFragment : DialogFragment() {
@@ -56,6 +58,27 @@ class ScheduleFragment : DialogFragment() {
         binding.spinnerAmpm.adapter = adapter_ampm
         binding.spinnerHour.adapter = adapter_hour
         binding.spinnerMin.adapter = adapter_min
+
+        binding.switch1.setOnCheckedChangeListener{buttonView, isChecked ->
+            if(isChecked){
+                binding.selectDayText.setVisibility(View.VISIBLE)
+                binding.selectDayToggle.setVisibility(View.VISIBLE)
+            } else {
+                binding.selectDayText.setVisibility(View.GONE)
+                binding.selectDayToggle.setVisibility(View.GONE)
+            }
+        }
+
+        binding.cancelBt.setOnClickListener{
+            val intent = Intent(context, MainActivity::class.java)
+            startActivity(intent)
+            StyleableToast.makeText(mainActivity, "계획 추가가 취소되었습니다.", Toast.LENGTH_LONG, R.style.mytoast).show()
+
+        }
+
+        binding.checkBt.setOnClickListener{
+
+        }
 
         return binding.root
     }

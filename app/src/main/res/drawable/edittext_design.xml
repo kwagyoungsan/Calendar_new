@@ -2,8 +2,11 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <stroke
         android:width="0.5dp"
-        android:color="@color/white" />
-    <corners android:radius="10dp" /> <!-- 모서리 기울기 -->
+        android:color="#d3d3d3" />
+
+    <corners android:radius="5dp" /> <!-- 모서리 기울기 -->
+
+    <solid android:color="#FFFFFF" />
 
     <padding
         android:bottom="8dp"
