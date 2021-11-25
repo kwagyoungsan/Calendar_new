@@ -82,6 +82,7 @@ class MainActivity : AppCompatActivity() {
             todayDecorator,
             eventDecorator
         )
+
         binding.addschbt.setOnClickListener{
             val scheduleFragment = ScheduleFragment()
             val transaction = supportFragmentManager.beginTransaction()
@@ -107,19 +108,23 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.calendarbt.setOnClickListener {
+
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+
         }
 
         binding.habitbt.setOnClickListener {
+
             val intent = Intent(this, HabitActivity::class.java)
             startActivity(intent)
+
         }
     }
 
     override fun onDestroy() {
         mBinding = null
-        Toast.makeText(this, "사라짐", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "메인 액티비티 사라짐", Toast.LENGTH_LONG).show()
         super.onDestroy()
     }
 }

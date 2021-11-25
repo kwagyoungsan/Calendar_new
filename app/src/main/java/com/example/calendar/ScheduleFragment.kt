@@ -20,7 +20,6 @@ import com.kakao.sdk.auth.LoginClient
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause.*
 import com.kakao.sdk.user.UserApiClient
-import io.github.muddz.styleabletoast.StyleableToast
 
 
 class ScheduleFragment : DialogFragment() {
@@ -59,7 +58,7 @@ class ScheduleFragment : DialogFragment() {
         binding.spinnerHour.adapter = adapter_hour
         binding.spinnerMin.adapter = adapter_min
 
-        binding.switch1.setOnCheckedChangeListener{buttonView, isChecked ->
+        binding.switchRepeat.setOnCheckedChangeListener{buttonView, isChecked ->
             if(isChecked){
                 binding.selectDayText.setVisibility(View.VISIBLE)
                 binding.selectDayToggle.setVisibility(View.VISIBLE)
@@ -72,12 +71,14 @@ class ScheduleFragment : DialogFragment() {
         binding.cancelBt.setOnClickListener{
             val intent = Intent(context, MainActivity::class.java)
             startActivity(intent)
-            StyleableToast.makeText(mainActivity, "계획 추가가 취소되었습니다.", Toast.LENGTH_LONG, R.style.mytoast).show()
+            Toast.makeText(mainActivity, "계획 추가가 취소되었습니다.", Toast.LENGTH_SHORT).show()
 
         }
 
         binding.checkBt.setOnClickListener{
-
+            val intent = Intent(context, MainActivity::class.java)
+            startActivity(intent)
+            Toast.makeText(mainActivity, "계획 추가가 완료되었습니다.", Toast.LENGTH_SHORT).show()
         }
 
         return binding.root

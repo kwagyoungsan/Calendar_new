@@ -28,6 +28,8 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -81,6 +83,8 @@
                 android:text="habit"
                 android:textSize="12sp"
                 app:iconPadding="0dp" />
+
+
 
         </LinearLayout>
     </LinearLayout>

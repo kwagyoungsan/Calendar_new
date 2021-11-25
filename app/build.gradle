@@ -52,5 +52,5 @@ dependencies {
     implementation 'com.prolificinteractive:material-calendarview:1.4.3'
     implementation "com.kakao.sdk:v2-user:2.0.1"
     implementation 'com.nex3z:toggle-button-group:1.2.3'
-    implementation 'io.github.muddz:styleabletoast:2.4.0'
+
 }

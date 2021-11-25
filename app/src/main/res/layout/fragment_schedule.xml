@@ -23,7 +23,7 @@
         android:layout_marginTop="20dp">
 
         <Switch
-            android:id="@+id/switch1"
+            android:id="@+id/switch_repeat"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -99,43 +99,46 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="월" />
+                android:text="월"/>
 
             <com.nex3z.togglebuttongroup.button.CircularToggle
                 android:id="@+id/tuesday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="화" />
+                android:text="화"/>
 
             <com.nex3z.togglebuttongroup.button.CircularToggle
                 android:id="@+id/wednesday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="수" />
+                android:text="수"/>
 
             <com.nex3z.togglebuttongroup.button.CircularToggle
                 android:id="@+id/thursday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="목" />
+                android:text="목"/>
 
             <com.nex3z.togglebuttongroup.button.CircularToggle
                 android:id="@+id/friday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="금" />
+                android:text="금"/>
 
             <com.nex3z.togglebuttongroup.button.CircularToggle
                 android:id="@+id/saturday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="토" />
+                android:text="토"/>
+
         </com.nex3z.togglebuttongroup.MultiSelectToggleGroup>
+
+
     </LinearLayout>
 
     <TextView
