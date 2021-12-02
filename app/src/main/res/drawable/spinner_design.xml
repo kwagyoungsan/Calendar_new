@@ -7,9 +7,10 @@
                 />
             <item
                 android:drawable="@drawable/ic_baseline_arrow_drop_down_24"
-                android:width="20dp"
-                android:right="20dp"
-                android:height="20dp"/>
+                android:width="12dp"
+                android:right="12dp"
+                android:height="12dp"
+                android:gravity="end|center"/>
         </layer-list>
     </item>
 </selector>

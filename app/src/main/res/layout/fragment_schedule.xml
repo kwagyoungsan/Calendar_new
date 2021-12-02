@@ -26,10 +26,11 @@
             android:id="@+id/switch_repeat"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:layout_weight="1"
+            android:checked="true"
             android:text="요일 반복"
-            android:textSize="15sp"
-            android:layout_marginLeft="20dp"/>
+            android:textSize="15sp" />
 
     </LinearLayout>
 
@@ -50,6 +51,7 @@
             android:layout_marginLeft="20dp"/>
 
         <EditText
+            android:id="@+id/plan"
             android:layout_width="300dp"
             android:layout_height="70dp"
             android:hint="내용을 입력해주세요."
@@ -161,10 +163,9 @@
             android:id="@+id/spinner_ampm"
             android:layout_width="60dp"
             android:layout_height="35dp"
+            android:layout_gravity="center"
             android:background="@drawable/spinner_design"
             android:popupBackground="@drawable/edittext_design"
-            android:layout_gravity="center"
-
 
 
             />

@@ -46,17 +46,20 @@ class ScheduleFragment : DialogFragment() {
     ): View? {
         val binding = FragmentScheduleBinding.inflate(inflater, container, false)
 
-        val ampm = resources.getStringArray(R.array.spinner_ampm)
-        val hour = resources.getStringArray(R.array.spinner_hour)
-        val minute = resources.getStringArray(R.array.spinner_minute)
+        ArrayAdapter.createFromResource(requireContext(),R.array.spinner_ampm,R.layout.spinner_item).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.spinnerAmpm.adapter = adapter
+        }
 
-        val adapter_ampm = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, ampm)
-        val adapter_hour = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, hour)
-        val adapter_min = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, minute)
+        ArrayAdapter.createFromResource(requireContext(),R.array.spinner_hour,R.layout.spinner_item).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.spinnerHour.adapter = adapter
+        }
 
-        binding.spinnerAmpm.adapter = adapter_ampm
-        binding.spinnerHour.adapter = adapter_hour
-        binding.spinnerMin.adapter = adapter_min
+        ArrayAdapter.createFromResource(requireContext(),R.array.spinner_minute,R.layout.spinner_item).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.spinnerMin.adapter = adapter
+        }
 
         binding.switchRepeat.setOnCheckedChangeListener{buttonView, isChecked ->
             if(isChecked){
@@ -78,7 +81,7 @@ class ScheduleFragment : DialogFragment() {
         binding.checkBt.setOnClickListener{
             val intent = Intent(context, MainActivity::class.java)
             startActivity(intent)
-            Toast.makeText(mainActivity, "계획 추가가 완료되었습니다.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(mainActivity,"계획 추가가 완료되었습니다.", Toast.LENGTH_SHORT).show()
         }
 
         return binding.root

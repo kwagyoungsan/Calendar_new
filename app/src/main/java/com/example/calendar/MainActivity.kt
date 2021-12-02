@@ -1,21 +1,16 @@
 package com.example.calendar
 
-import android.app.AlertDialog
-import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import android.widget.DatePicker
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.calendar.databinding.ActivityMainBinding
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.CalendarMode
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -118,6 +113,10 @@ class MainActivity : AppCompatActivity() {
 
             val intent = Intent(this, HabitActivity::class.java)
             startActivity(intent)
+
+        }
+
+        materialCalendar.setOnDateChangedListener { view, year, month, dayOfMonth ->
 
         }
     }
