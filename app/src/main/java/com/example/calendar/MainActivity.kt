@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
 
         val materialCalendar: MaterialCalendarView = findViewById(R.id.materialCalendar)
 
-
 //        val keyHash = Utility.getKeyHash(this)
 //        Log.d("Hash", keyHash)
 
@@ -53,7 +52,6 @@ class MainActivity : AppCompatActivity() {
             )
             .setCalendarDisplayMode(CalendarMode.MONTHS)
             .commit()
-
 
         val stCalendarDay =
             CalendarDay(currentYear, currentMonth, (currentDate) - (currentDate - 1))
@@ -77,18 +75,6 @@ class MainActivity : AppCompatActivity() {
             eventDecorator
         )
 
-        binding.addschbt.setOnClickListener{
-            val scheduleFragment = ScheduleFragment()
-            val transaction = supportFragmentManager.beginTransaction()
-
-            binding.materialCalendar.setVisibility(View.GONE)
-            binding.blank.setVisibility(View.GONE)
-            binding.menuwindow.setVisibility(View.GONE)
-            binding.addschwindow.setVisibility(View.GONE)
-            transaction.replace(R.id.view, scheduleFragment)
-            transaction.commit()
-        }
-
         binding.menubt.setOnClickListener {
             val menuFragment = MenuFragment()
             val transaction = supportFragmentManager.beginTransaction()
@@ -96,33 +82,40 @@ class MainActivity : AppCompatActivity() {
             binding.materialCalendar.setVisibility(View.GONE)
             binding.blank.setVisibility(View.GONE)
             binding.menuwindow.setVisibility(View.GONE)
-            binding.addschwindow.setVisibility(View.GONE)
             transaction.replace(R.id.view, menuFragment)
             transaction.commit()
         }
 
         binding.calendarbt.setOnClickListener {
-
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
 
         }
 
         binding.habitbt.setOnClickListener {
-
             val intent = Intent(this, HabitActivity::class.java)
             startActivity(intent)
 
         }
 
-        binding.materialCalendar.setOnDateChangedListener { widget, date, selected ->
+        binding.materialCalendar.setOnDateChangedListener {widget, date, selected ->
+            val scheduleFragment = ScheduleFragment()
+            val bundle = Bundle()
+            val transaction = supportFragmentManager.beginTransaction()
 
-//            toString getString으로 날짜 데이터 옮기기
-//            "$year.$month.$dayOfMonth ($dayName)"
+            bundle.putString("Year", (date.year).toString())
+            bundle.putString("Month", (date.month+1).toString())
+            bundle.putString("Day", (date.day).toString())
+
+            scheduleFragment.arguments = bundle
+
+            binding.materialCalendar.setVisibility(View.GONE)
+            binding.blank.setVisibility(View.GONE)
+            binding.menuwindow.setVisibility(View.GONE)
+            transaction.replace(R.id.view, scheduleFragment)
+            transaction.commit()
 
         }
-
-
     }
 
     override fun onDestroy() {

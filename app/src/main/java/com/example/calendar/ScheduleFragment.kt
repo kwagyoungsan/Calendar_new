@@ -27,7 +27,6 @@ class ScheduleFragment : DialogFragment() {
     private lateinit var binding: FragmentScheduleBinding
 
 
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mainActivity = context as MainActivity
@@ -46,23 +45,40 @@ class ScheduleFragment : DialogFragment() {
     ): View? {
         val binding = FragmentScheduleBinding.inflate(inflater, container, false)
 
-        ArrayAdapter.createFromResource(requireContext(),R.array.spinner_ampm,R.layout.spinner_item).also { adapter ->
+        binding.scheduleDate.text =
+            arguments?.getString("Year") + "년 " + arguments?.getString("Month") + "월 " + arguments?.getString("Day") + "일"
+
+
+
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.spinner_ampm,
+            R.layout.spinner_item
+        ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.spinnerAmpm.adapter = adapter
         }
 
-        ArrayAdapter.createFromResource(requireContext(),R.array.spinner_hour,R.layout.spinner_item).also { adapter ->
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.spinner_hour,
+            R.layout.spinner_item
+        ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.spinnerHour.adapter = adapter
         }
 
-        ArrayAdapter.createFromResource(requireContext(),R.array.spinner_minute,R.layout.spinner_item).also { adapter ->
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.spinner_minute,
+            R.layout.spinner_item
+        ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.spinnerMin.adapter = adapter
         }
 
-        binding.switchRepeat.setOnCheckedChangeListener{buttonView, isChecked ->
-            if(isChecked){
+        binding.switchRepeat.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
                 binding.selectDayText.setVisibility(View.VISIBLE)
                 binding.selectDayToggle.setVisibility(View.VISIBLE)
             } else {
@@ -71,17 +87,17 @@ class ScheduleFragment : DialogFragment() {
             }
         }
 
-        binding.cancelBt.setOnClickListener{
+        binding.cancelBt.setOnClickListener {
             val intent = Intent(context, MainActivity::class.java)
             startActivity(intent)
             Toast.makeText(mainActivity, "계획 추가가 취소되었습니다.", Toast.LENGTH_SHORT).show()
 
         }
 
-        binding.checkBt.setOnClickListener{
+        binding.checkBt.setOnClickListener {
             val intent = Intent(context, MainActivity::class.java)
             startActivity(intent)
-            Toast.makeText(mainActivity,"계획 추가가 완료되었습니다.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(mainActivity, "계획 추가가 완료되었습니다.", Toast.LENGTH_SHORT).show()
         }
 
         return binding.root
