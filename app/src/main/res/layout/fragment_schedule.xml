@@ -48,7 +48,7 @@
             android:text="계획"
             android:textSize="15sp"
             android:textColor="@color/black"
-            android:layout_marginLeft="20dp"/>
+            android:layout_marginLeft="20dp" />
 
         <EditText
             android:id="@+id/plan"
@@ -57,9 +57,10 @@
             android:hint="내용을 입력해주세요."
             android:textSize="15sp"
             android:textColor="@color/black"
-            android:layout_marginLeft="20dp"/>
+            android:layout_marginLeft="20dp" />
 
     </LinearLayout>
+
 
     <TextView
         android:id="@+id/select_day_text"

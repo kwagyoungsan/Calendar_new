@@ -29,6 +29,8 @@ class MenuFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mainActivity = context as MainActivity
+        Log.e("haeun", "context: "+context)
+        Log.e("haeun", "main: "+mainActivity)
     }
 
 
@@ -54,8 +56,8 @@ class MenuFragment : Fragment() {
                     tag, "토큰 정보 보기 성공" + "\n회원번호 : ${tokenInfo.id}" +
                             "\n만료시간: ${tokenInfo.expiresIn} 초"
                 )
-                val intent = Intent(context, MainActivity::class.java)
-                startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+//                val intent = Intent(context, MainActivity::class.java)
+//                startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
             }
         }
 

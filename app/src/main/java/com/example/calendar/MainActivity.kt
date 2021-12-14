@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         val materialCalendar: MaterialCalendarView = findViewById(R.id.materialCalendar)
 
+
 //        val keyHash = Utility.getKeyHash(this)
 //        Log.d("Hash", keyHash)
 
@@ -65,15 +66,13 @@ class MainActivity : AppCompatActivity() {
         val sundayDecorator = SundayDecorator()
         val saturdayDecorator = SaturdayDecorator()
         val minMaxDecorator = MinMaxDecorator(stCalendarDay, enCalendarDay)
-//        val boldDecorator = BoldDecorator(stCalendarDay, enCalendarDay)
+        val boldDecorator = BoldDecorator(stCalendarDay, enCalendarDay)
         val todayDecorator = TodayDecorator(this)
         val eventDecorator = EventDecorator(Color.RED, Collections.singleton(CalendarDay.today()))
 
         materialCalendar.addDecorators(
             sundayDecorator,
             saturdayDecorator,
-//            boldDecorator,
-            minMaxDecorator,
             todayDecorator,
             eventDecorator
         )
@@ -116,9 +115,14 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        materialCalendar.setOnDateChangedListener { view, year, month, dayOfMonth ->
+        binding.materialCalendar.setOnDateChangedListener { widget, date, selected ->
+
+//            toString getString으로 날짜 데이터 옮기기
+//            "$year.$month.$dayOfMonth ($dayName)"
 
         }
+
+
     }
 
     override fun onDestroy() {
