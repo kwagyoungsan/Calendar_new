@@ -1,7 +1,8 @@
 package com.example.calendar
 
-data class PlanData(
-    var plan: String,
-    val start: String,
-    val end: String
-)
+import com.chibatching.kotpref.KotprefModel
+
+object PlanData : KotprefModel() {
+    var plan: String by stringPref()
+    val start: String by stringPref()
+}
