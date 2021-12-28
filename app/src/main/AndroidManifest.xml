@@ -35,6 +35,6 @@
                     android:scheme="kakao7d93b360b9e054deeba80bd62b95ec25" />
             </intent-filter>
         </activity>
-        <activity android:name=".HabitActivity" />
+        <activity android:name=".ListActivity" />
     </application>
 </manifest>

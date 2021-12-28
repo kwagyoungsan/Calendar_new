@@ -92,8 +92,8 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        binding.habitbt.setOnClickListener {
-            val intent = Intent(this, HabitActivity::class.java)
+        binding.listbt.setOnClickListener {
+            val intent = Intent(this, ListActivity::class.java)
             startActivity(intent)
 
         }

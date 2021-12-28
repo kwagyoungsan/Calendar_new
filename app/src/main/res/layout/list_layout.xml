@@ -15,12 +15,13 @@
         android:orientation="vertical"
         >
 
-        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-            android:id="@+id/materialCalendar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:mcv_selectionColor="#d2d2d2" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="674dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_recycler"/>
+
 
         <LinearLayout
             android:id="@+id/blank"
@@ -60,13 +61,13 @@
                 app:iconPadding="0dp" />
 
             <Button
-                android:id="@+id/habitbt"
+                android:id="@+id/listbt"
                 style="@style/Widget.AppCompat.Button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawableTop="@drawable/ic_baseline_access_time_24"
-                android:text="habit"
+                android:drawableTop="@drawable/ic_baseline_list_24"
+                android:text="plan list"
                 android:textSize="12sp"
                 app:iconPadding="0dp" />
 

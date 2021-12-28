@@ -58,13 +58,13 @@
                 app:iconPadding="0dp" />
 
             <Button
-                android:id="@+id/habitbt"
+                android:id="@+id/listbt"
                 style="@style/Widget.AppCompat.Button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawableTop="@drawable/ic_baseline_access_time_24"
-                android:text="habit"
+                android:drawableTop="@drawable/ic_baseline_list_24"
+                android:text="plan list"
                 android:textSize="12sp"
                 app:iconPadding="0dp" />
         </LinearLayout>
