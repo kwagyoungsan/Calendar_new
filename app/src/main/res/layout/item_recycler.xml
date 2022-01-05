@@ -25,9 +25,4 @@
         android:text="시작 시간"
         android:layout_marginBottom="5dp"/>
 
-    <TextView
-        android:id="@+id/end_recycler"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="종료 시간" />
 </LinearLayout>

@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.calendar.databinding.FragmentScheduleBinding
-import kotlinx.android.synthetic.main.fragment_schedule.*
+import org.json.JSONArray
 
 
 class ScheduleFragment : DialogFragment() {
@@ -37,9 +37,19 @@ class ScheduleFragment : DialogFragment() {
     ): View? {
         val binding = FragmentScheduleBinding.inflate(inflater, container, false)
 
-        binding.scheduleDate.text = arguments?.getString("Year") + "년 " + arguments?.getString("Month") + "월 " + arguments?.getString("Day") + "일"
-        var plan = binding.scheduleplan.text.toString()
-        val date = binding.scheduleDate.text.toString()
+        binding.scheduleDate.text =
+            arguments?.getString("Year") + "년 " + arguments?.getString("Month") + "월 " + arguments?.getString(
+                "Day"
+            ) + "일"
+
+        var plan = binding.scheduleplan
+        val date = binding.scheduleDate
+
+        val preferences = mainActivity.getSharedPreferences("pref", Context.MODE_PRIVATE)
+
+        var arr : ArrayList<PlanData> = ArrayList()
+
+
 
         ArrayAdapter.createFromResource(
             requireContext(),
@@ -86,26 +96,34 @@ class ScheduleFragment : DialogFragment() {
         }
 
         binding.checkBt.setOnClickListener {
-            GlobalApplication.prefs.setString("plan", plan)
-            GlobalApplication.prefs.setString("date", date)
-//          date 값은 넘어오는데, plan 값은 안넘어옴
+            var plan_data = plan.text.toString()
+            var date_data = date.text.toString()
+
+            var jsonArr = JSONArray()
+
+            arr.add(PlanData(plan_data,date_data))
+            Log.e("haeun", "arr: $arr")
+
+            for(i in arr){
+                jsonArr.put(i)
+            }
+
+
+            var resultArr = jsonArr.toString()
+
+            val editor = preferences?.edit()
+            editor?.putString("person", resultArr)
+            editor?.apply()
+
+            var result = preferences?.getString("person","")
+            Log.e("haeun", "result: $result")
 
             val intent = Intent(context, MainActivity::class.java)
             startActivity(intent)
             Toast.makeText(mainActivity, "계획 추가가 완료되었습니다.", Toast.LENGTH_SHORT).show()
 
-            val Tag: String = "preferences : "
-            Log.d(Tag, GlobalApplication.prefs.getString("plan", plan))
-            Log.d(Tag, GlobalApplication.prefs.getString("date", date))
 
         }
-
-// 데이터 조회   GlobalApplication.prefs.getString("email", "no email")
-// 데이터 저장   GlobalApplication.prefs.setString("email", "abcd@gmail.com")
-
-
-
-
 
         return binding.root
     }

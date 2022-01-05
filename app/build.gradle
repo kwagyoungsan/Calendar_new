@@ -52,8 +52,7 @@ dependencies {
     implementation 'com.prolificinteractive:material-calendarview:1.4.3'
     implementation "com.kakao.sdk:v2-user:2.0.1"
     implementation 'com.nex3z:toggle-button-group:1.2.3'
-    implementation "com.chibatching.kotpref:kotpref:2.8.0"
-    implementation 'com.chibatching.kotpref:gson-support:2.8.0'
+
 
    
 
