@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.calendar.databinding.ListLayoutBinding
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.CalendarMode
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
@@ -30,19 +32,25 @@ class ListActivity : AppCompatActivity() {
         actionBar?.hide()
 
         val preferences = getSharedPreferences("pref", Context.MODE_PRIVATE)
-        var result = preferences?.getString("person","")
+        var result = preferences?.getString("person", "")
 
-        var arr : ArrayList<PlanData> = ArrayList()
+        var arr: ArrayList<PlanData> = ArrayList()
+        var gson = GsonBuilder().create()
+        var listType: TypeToken<MutableList<PlanData>> = object : TypeToken<MutableList<PlanData>>()
 
-        var arrJson = JSONArray(result)
+        val resultData: List<PlanData> = gson.fromJson(result, listType.type)
+//        var arrJson = JSONArray(result)
 
+        for (i in resultData.indices) {
+            var plan = resultData[i].plan
+            var date = resultData[i].start
 
-
-        for (i in 0 until arrJson.length()) {
-            arr.add(PlanData(arrJson.optString(i),arrJson.optString(i)))
+            arr.add(PlanData(plan, date))
         }
+
+
         val adapter = RecyclerUserAdapter(arr)
-//        mutable로 하면 어댑터가 안되고 arraylist로 하면 스케쥴프레그먼트에서 plandata가 안담아짐
+
         binding.list.adapter = adapter
 
 

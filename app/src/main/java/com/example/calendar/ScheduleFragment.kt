@@ -11,6 +11,8 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.calendar.databinding.FragmentScheduleBinding
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import org.json.JSONArray
 
 
@@ -46,8 +48,12 @@ class ScheduleFragment : DialogFragment() {
         val date = binding.scheduleDate
 
         val preferences = mainActivity.getSharedPreferences("pref", Context.MODE_PRIVATE)
-
         var arr : ArrayList<PlanData> = ArrayList()
+
+        var gson = GsonBuilder().create()
+        var listType : TypeToken<MutableList<PlanData>> = object : TypeToken<MutableList<PlanData>>(){}
+
+
 
 
 
@@ -99,14 +105,18 @@ class ScheduleFragment : DialogFragment() {
             var plan_data = plan.text.toString()
             var date_data = date.text.toString()
 
-            var jsonArr = JSONArray()
+            arr.add(0, PlanData("공부","2022.01.01"))
+            arr.add(1, PlanData("운동","2022.01.03"))
+            arr.add(2, PlanData("일기","매일"))
+
+            var jsonArr = gson.toJson(arr,listType.type)
 
             arr.add(PlanData(plan_data,date_data))
             Log.e("haeun", "arr: $arr")
 
-            for(i in arr){
-                jsonArr.put(i)
-            }
+//            for(i in arr){
+//                jsonArr.put(i)
+//            }
 
 
             var resultArr = jsonArr.toString()
@@ -115,8 +125,8 @@ class ScheduleFragment : DialogFragment() {
             editor?.putString("person", resultArr)
             editor?.apply()
 
-            var result = preferences?.getString("person","")
-            Log.e("haeun", "result: $result")
+//            var result = preferences?.getString("person","")
+//            Log.e("haeun", "result: $result")
 
             val intent = Intent(context, MainActivity::class.java)
             startActivity(intent)
