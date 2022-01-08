@@ -48,13 +48,14 @@ class ScheduleFragment : DialogFragment() {
         val date = binding.scheduleDate
 
         val preferences = mainActivity.getSharedPreferences("pref", Context.MODE_PRIVATE)
-        var arr : ArrayList<PlanData> = ArrayList()
+
+        val jsonData = preferences.getString("person", "")
+//        var arr : ArrayList<PlanData> = ArrayList()
 
         var gson = GsonBuilder().create()
+
         var listType : TypeToken<MutableList<PlanData>> = object : TypeToken<MutableList<PlanData>>(){}
-
-
-
+        val arr :ArrayList<PlanData>? = gson.fromJson(jsonData, listType.type)
 
 
         ArrayAdapter.createFromResource(
@@ -105,28 +106,19 @@ class ScheduleFragment : DialogFragment() {
             var plan_data = plan.text.toString()
             var date_data = date.text.toString()
 
-            arr.add(0, PlanData("공부","2022.01.01"))
-            arr.add(1, PlanData("운동","2022.01.03"))
-            arr.add(2, PlanData("일기","매일"))
-
+            arr?.add(PlanData(plan_data,date_data))
+            arr?.add(PlanData("asdf","asdf"))
             var jsonArr = gson.toJson(arr,listType.type)
 
-            arr.add(PlanData(plan_data,date_data))
             Log.e("haeun", "arr: $arr")
 
-//            for(i in arr){
-//                jsonArr.put(i)
-//            }
-
-
             var resultArr = jsonArr.toString()
+
+            Log.e("haeun","resultArr: $resultArr")
 
             val editor = preferences?.edit()
             editor?.putString("person", resultArr)
             editor?.apply()
-
-//            var result = preferences?.getString("person","")
-//            Log.e("haeun", "result: $result")
 
             val intent = Intent(context, MainActivity::class.java)
             startActivity(intent)

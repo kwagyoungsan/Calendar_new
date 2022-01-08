@@ -105,6 +105,8 @@ class MainActivity : AppCompatActivity() {
             bundle.putString("Month", (date.month+1).toString())
             bundle.putString("Day", (date.day).toString())
 
+
+
             scheduleFragment.arguments = bundle
 
             binding.materialCalendar.setVisibility(View.GONE)

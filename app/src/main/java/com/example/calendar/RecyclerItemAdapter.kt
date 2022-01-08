@@ -31,7 +31,7 @@ class RecyclerUserAdapter(private val items: ArrayList<PlanData>) : RecyclerView
         private var view: View = v
         fun bind(arr: PlanData) {
             view.plan_recycler.text = arr.plan
-            view.start_recycler.text = arr.start
+            view.date_recycler.text = arr.date
 
         }
     }
