@@ -1,16 +1,22 @@
 package com.example.calendar
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.calendar.databinding.ActivityMainBinding
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.CalendarMode
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -31,7 +37,31 @@ class MainActivity : AppCompatActivity() {
         val currentMonth = startTimeCalendar.get(Calendar.MONTH)
         val currentDate = startTimeCalendar.get(Calendar.DATE)
 
+        val preferences = getSharedPreferences("pref", Context.MODE_PRIVATE)
+        var result = preferences?.getString("person", "")
+        var arr: ArrayList<PlanData> = ArrayList()
+        var gson = GsonBuilder().create()
+        var listType: TypeToken<MutableList<PlanData>> =
+            object : TypeToken<MutableList<PlanData>>() {}
+
         val materialCalendar: MaterialCalendarView = findViewById(R.id.materialCalendar)
+
+        if (!result.equals("")) {
+            val resultData: List<PlanData> = gson.fromJson(result, listType.type)
+
+            for (i in resultData.indices) {
+                var plan = resultData[i].plan
+                var date = resultData[i].date
+                var day = resultData[i].day
+                var time = resultData[i].time
+                arr.add(PlanData(plan, date, day, time))
+
+                for (i in 0..arr.size) {
+                    val eventDecorator = EventDecorator(Color.RED, Collections.singleton(date))
+                    materialCalendar.addDecorator(eventDecorator)
+                }
+            }
+        }
 
 //        val keyHash = Utility.getKeyHash(this)
 //        Log.d("Hash", keyHash)
@@ -64,14 +94,14 @@ class MainActivity : AppCompatActivity() {
         val sundayDecorator = SundayDecorator()
         val saturdayDecorator = SaturdayDecorator()
         val todayDecorator = TodayDecorator(this)
-        val eventDecorator = EventDecorator(Color.RED, Collections.singleton(CalendarDay.today()))
+
 
         materialCalendar.addDecorators(
             sundayDecorator,
             saturdayDecorator,
             todayDecorator,
-            eventDecorator
-        )
+
+            )
 
         binding.menubt.setOnClickListener {
             val menuFragment = MenuFragment()
@@ -96,25 +126,23 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        binding.materialCalendar.setOnDateChangedListener {widget, date, selected ->
+        binding.materialCalendar.setOnDateChangedListener { widget, date, selected ->
             val scheduleFragment = ScheduleFragment()
             val bundle = Bundle()
             val transaction = supportFragmentManager.beginTransaction()
 
             bundle.putString("Year", (date.year).toString())
-            bundle.putString("Month", (date.month+1).toString())
+            bundle.putString("Month", (date.month + 1).toString())
             bundle.putString("Day", (date.day).toString())
 
-
-
             scheduleFragment.arguments = bundle
+            scheduleFragment.setDate(date)
 
             binding.materialCalendar.setVisibility(View.GONE)
             binding.blank.setVisibility(View.GONE)
             binding.menuwindow.setVisibility(View.GONE)
             transaction.replace(R.id.view, scheduleFragment)
             transaction.commit()
-
         }
     }
 

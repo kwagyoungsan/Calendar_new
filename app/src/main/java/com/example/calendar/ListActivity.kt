@@ -33,27 +33,27 @@ class ListActivity : AppCompatActivity() {
 
         val preferences = getSharedPreferences("pref", Context.MODE_PRIVATE)
         var result = preferences?.getString("person", "")
-        Log.e("haeun","result: $result")
         var arr: ArrayList<PlanData> = ArrayList()
         var gson = GsonBuilder().create()
         var listType: TypeToken<MutableList<PlanData>> = object : TypeToken<MutableList<PlanData>>(){}
 
-        val resultData: List<PlanData> = gson.fromJson(result, listType.type)
+        if(!result.equals("")){
+            val resultData: List<PlanData> = gson.fromJson(result, listType.type)
 
-        for (i in resultData.indices) {
-            var plan = resultData[i].plan
-            var date = resultData[i].date
+            for (i in resultData.indices) {
+                var plan = resultData[i].plan
+                var date = resultData[i].date
+                var day = resultData[i].day
+                var time = resultData[i].time
+                arr.add(PlanData(plan, date,day,time))
 
-            arr.add(PlanData(plan, date))
-
+            }
         }
 
 
         val adapter = RecyclerUserAdapter(arr)
 
         binding.list.adapter = adapter
-
-        Log.e("haeun", "resultData: $resultData")
 
         binding.menubt.setOnClickListener {
             val menuFragment = MenuFragment()

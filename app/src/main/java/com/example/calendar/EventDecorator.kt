@@ -1,14 +1,15 @@
 package com.example.calendar
 
-import android.graphics.Color
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
 import com.prolificinteractive.materialcalendarview.spans.DotSpan
+import java.time.LocalDate
+
 // 밑에 점
 class EventDecorator(
     private val color: Int,
-    private val dates: Set<CalendarDay>
+    private val dates: MutableSet<CalendarDay>
 ) : DayViewDecorator {
 //    private lateinit var colors: IntArray
 
