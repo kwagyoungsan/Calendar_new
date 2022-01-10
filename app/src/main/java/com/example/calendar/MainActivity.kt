@@ -143,6 +143,7 @@ class MainActivity : AppCompatActivity() {
             binding.menuwindow.setVisibility(View.GONE)
             transaction.replace(R.id.view, scheduleFragment)
             transaction.commit()
+//            hello
         }
     }
 
