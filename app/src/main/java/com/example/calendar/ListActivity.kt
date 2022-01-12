@@ -2,20 +2,13 @@ package com.example.calendar
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.calendar.databinding.ListLayoutBinding
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
-import com.prolificinteractive.materialcalendarview.CalendarDay
-import com.prolificinteractive.materialcalendarview.CalendarMode
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView
-import org.json.JSONArray
 import java.util.*
 
 class ListActivity : AppCompatActivity() {
@@ -45,11 +38,10 @@ class ListActivity : AppCompatActivity() {
                 var date = resultData[i].date
                 var day = resultData[i].day
                 var time = resultData[i].time
-                arr.add(PlanData(plan, date,day,time))
 
+                arr.add(PlanData(plan, date, day,time))
             }
         }
-
 
         val adapter = RecyclerUserAdapter(arr)
 
@@ -67,14 +59,11 @@ class ListActivity : AppCompatActivity() {
         binding.calendarbt.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-
         }
 
         binding.listbt.setOnClickListener {
             val intent = Intent(this, ListActivity::class.java)
             startActivity(intent)
-
         }
-
     }
 }

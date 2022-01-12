@@ -9,6 +9,7 @@ import java.util.*
 //일요일
 class SundayDecorator: DayViewDecorator {
     private val calendar = Calendar.getInstance()
+
     override fun shouldDecorate(day: CalendarDay?): Boolean {
         day?.copyTo(calendar)
         val weekDay = calendar.get(Calendar.DAY_OF_WEEK)

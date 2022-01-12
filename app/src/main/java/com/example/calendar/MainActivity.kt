@@ -15,9 +15,10 @@ import com.google.gson.reflect.TypeToken
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.CalendarMode
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
@@ -46,6 +47,7 @@ class MainActivity : AppCompatActivity() {
 
         val materialCalendar: MaterialCalendarView = findViewById(R.id.materialCalendar)
 
+        //haeun
         if (!result.equals("")) {
             val resultData: List<PlanData> = gson.fromJson(result, listType.type)
 
@@ -56,15 +58,46 @@ class MainActivity : AppCompatActivity() {
                 var time = resultData[i].time
                 arr.add(PlanData(plan, date, day, time))
 
+                val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
+                var resultDay = dateFormat.format(date.date)
+                var resultDate: Date = dateFormat.parse(resultDay)
+                var calendar = Calendar.getInstance()
+                calendar.time = resultDate
+
+                val random = Random()
+                val num = random.nextInt(256)
+
+                for (i in date.day..getDaysInMonth(calendar.get(Calendar.MONTH + 1),
+                    calendar.get(Calendar.YEAR))) {
+                    var thisResultDate: Date = dateFormat.parse("${calendar.get(Calendar.YEAR)}-${calendar.get(Calendar.MONTH) + 1}-${i}")
+                    var thisCalendar = Calendar.getInstance()
+                    thisCalendar.time = thisResultDate
+
+                        for (i in 0 until day.size) {
+                            if (thisCalendar.get(Calendar.DAY_OF_WEEK)
+                                    .toString() == getDateToInt(day)[i]
+                            ) { // day 에 들어있는 값(함수를 사용해서 인트로 바꿈)과 캘린더에 일치하는 값이 있으면 EventDecorator
+
+
+                                var thisCalendarDay: CalendarDay = CalendarDay.from(thisResultDate)
+                                var eventDecorator =
+                                    EventDecorator(Color.rgb(0, num, num),
+                                        Collections.singleton(thisCalendarDay))
+                                materialCalendar.addDecorator(eventDecorator)
+                            }
+                        }
+                    }
+
+
                 for (i in 0..arr.size) {
-                    val eventDecorator = EventDecorator(Color.RED, Collections.singleton(date))
-                    materialCalendar.addDecorator(eventDecorator)
+                    if (day.size < 1){
+                        var eventDecorator = EventDecorator(Color.RED, Collections.singleton(date))
+                        materialCalendar.addDecorator(eventDecorator)
+                    }
+
                 }
             }
         }
-
-//        val keyHash = Utility.getKeyHash(this)
-//        Log.d("Hash", keyHash)
 
         actionBar = supportActionBar
         actionBar?.hide()
@@ -95,13 +128,10 @@ class MainActivity : AppCompatActivity() {
         val saturdayDecorator = SaturdayDecorator()
         val todayDecorator = TodayDecorator(this)
 
-
         materialCalendar.addDecorators(
             sundayDecorator,
             saturdayDecorator,
-            todayDecorator,
-
-            )
+            todayDecorator)
 
         binding.menubt.setOnClickListener {
             val menuFragment = MenuFragment()
@@ -117,13 +147,11 @@ class MainActivity : AppCompatActivity() {
         binding.calendarbt.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-
         }
 
         binding.listbt.setOnClickListener {
             val intent = Intent(this, ListActivity::class.java)
             startActivity(intent)
-
         }
 
         binding.materialCalendar.setOnDateChangedListener { widget, date, selected ->
@@ -143,7 +171,6 @@ class MainActivity : AppCompatActivity() {
             binding.menuwindow.setVisibility(View.GONE)
             transaction.replace(R.id.view, scheduleFragment)
             transaction.commit()
-//            hello
         }
     }
 
@@ -151,5 +178,36 @@ class MainActivity : AppCompatActivity() {
         mBinding = null
         Toast.makeText(this, "메인 액티비티 사라짐", Toast.LENGTH_LONG).show()
         super.onDestroy()
+    }
+
+    fun getDaysInMonth(month: Int, year: Int): Int { // 지정한 달에 총 몇일이 있는지 계산하는 함수
+        return when (month - 1) {
+            Calendar.JANUARY, Calendar.MARCH, Calendar.MAY, Calendar.JULY, Calendar.AUGUST, Calendar.OCTOBER, Calendar.DECEMBER -> 31
+            Calendar.APRIL, Calendar.JUNE, Calendar.SEPTEMBER, Calendar.NOVEMBER -> 30
+            Calendar.FEBRUARY -> if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) 29 else 28 // 윤년계산
+            else -> throw Exception("Exception Month")
+        }
+    }
+
+    fun getDateToInt(dayName: ArrayList<String>): ArrayList<String> {
+        var result: ArrayList<String> = ArrayList()
+        for (i in 0 until dayName.size) {
+            if (dayName[i] == "일") {
+                result.add("1")
+            } else if (dayName[i] == "월") {
+                result.add("2")
+            } else if (dayName[i] == "화") {
+                result.add("3")
+            } else if (dayName[i] == "수") {
+                result.add("4")
+            } else if (dayName[i] == "목") {
+                result.add("5")
+            } else if (dayName[i] == "금") {
+                result.add("6")
+            } else if (dayName[i] == "토") {
+                result.add("7")
+            }
+        }
+        return result
     }
 }

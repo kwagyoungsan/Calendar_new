@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,9 +14,6 @@ import androidx.fragment.app.DialogFragment
 import com.example.calendar.databinding.FragmentScheduleBinding
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
-import kotlinx.android.synthetic.main.fragment_schedule.*
-import kotlinx.android.synthetic.main.header.view.*
-import org.json.JSONArray
 import com.prolificinteractive.materialcalendarview.CalendarDay
 
 
@@ -47,9 +43,7 @@ class ScheduleFragment : DialogFragment() {
         val binding = FragmentScheduleBinding.inflate(inflater, container, false)
         binding.scheduleDate.text =
             arguments?.getString("Year") + "년 " + arguments?.getString("Month") + "월 " + arguments?.getString(
-                "Day"
-            ) + "일"
-
+                "Day") + "일"
         var resultAMPM = ""
         var resultHOUR = ""
         var resultMINUTE = ""
@@ -58,14 +52,12 @@ class ScheduleFragment : DialogFragment() {
         var date = binding.scheduleDate
 
         val preferences = mainActivity.getSharedPreferences("pref", Context.MODE_PRIVATE)
-
         val jsonData = preferences.getString("person", "")
-
         var gson = GsonBuilder().create()
-
         var listType: TypeToken<MutableList<PlanData>> =
             object : TypeToken<MutableList<PlanData>>() {}
         val arr: ArrayList<PlanData>? = gson.fromJson(jsonData, listType.type)
+
 
         var ampmDATA = resources.getStringArray(R.array.spinner_ampm)
         var hourDATA = resources.getStringArray(R.array.spinner_hour)
@@ -141,32 +133,39 @@ class ScheduleFragment : DialogFragment() {
 
         binding.checkBt.setOnClickListener {
             var plan_data = plan.text.toString()
-            var date_data = date.text.toString()
-            var time_data = resultAMPM + " " + resultHOUR + "시 " + resultMINUTE + "분"
-
             var dayArr = ArrayList<String>(7)
+            var time_data = resultAMPM + " " + resultHOUR + "시 " + resultMINUTE + "분"
+            val intent = Intent(context, MainActivity::class.java)
 
             if (binding.sunday.isChecked) {
                 dayArr.add("일")
+                intent.putExtra("일", "일")
             }
             if (binding.monday.isChecked) {
                 dayArr.add("월")
+                intent.putExtra("월", "월")
             }
             if (binding.tuesday.isChecked) {
                 dayArr.add("화")
+                intent.putExtra("화", "화")
             }
             if (binding.wednesday.isChecked) {
                 dayArr.add("수")
+                intent.putExtra("수", "수")
             }
             if (binding.thursday.isChecked) {
                 dayArr.add("목")
+                intent.putExtra("목", "목")
             }
             if (binding.friday.isChecked) {
                 dayArr.add("금")
+                intent.putExtra("금", "금")
             }
             if (binding.saturday.isChecked) {
                 dayArr.add("토")
+                intent.putExtra("토", "토")
             }
+
 
             if (arr != null) {
                 arr?.add(PlanData(plan_data, calendarDay, dayArr, time_data))
@@ -185,11 +184,8 @@ class ScheduleFragment : DialogFragment() {
                 editor?.apply()
             }
 
-            val intent = Intent(context, MainActivity::class.java)
             startActivity(intent)
             Toast.makeText(mainActivity, "계획 추가가 완료되었습니다.", Toast.LENGTH_SHORT).show()
-
-
         }
 
         return binding.root

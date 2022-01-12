@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_recycler.view.*
 
 class RecyclerUserAdapter(private val items: ArrayList<PlanData>) : RecyclerView.Adapter<RecyclerUserAdapter.ViewHolder>() {
-
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: RecyclerUserAdapter.ViewHolder, position: Int) {

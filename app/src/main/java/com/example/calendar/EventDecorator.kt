@@ -11,8 +11,6 @@ class EventDecorator(
     private val color: Int,
     private val dates: MutableSet<CalendarDay>
 ) : DayViewDecorator {
-//    private lateinit var colors: IntArray
-
     override fun shouldDecorate(day: CalendarDay?): Boolean {
         return dates.contains(day)
     }

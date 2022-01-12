@@ -3,17 +3,13 @@ package com.example.calendar
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
-import android.graphics.Point
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.annotation.MainThread
+import androidx.fragment.app.Fragment
 import com.example.calendar.databinding.FragmentMenuBinding
 import com.kakao.sdk.auth.LoginClient
 import com.kakao.sdk.auth.model.OAuthToken
@@ -24,8 +20,6 @@ import com.kakao.sdk.user.UserApiClient
 class MenuFragment : Fragment() {
     lateinit var mainActivity: MainActivity
 
-
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mainActivity = context as MainActivity
@@ -33,19 +27,14 @@ class MenuFragment : Fragment() {
         Log.e("haeun", "main: "+mainActivity)
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         val binding = FragmentMenuBinding.inflate(inflater, container, false)
-
-
-
 
         UserApiClient.instance.accessTokenInfo { tokenInfo, error ->
             if (error != null) {
@@ -56,8 +45,6 @@ class MenuFragment : Fragment() {
                     tag, "토큰 정보 보기 성공" + "\n회원번호 : ${tokenInfo.id}" +
                             "\n만료시간: ${tokenInfo.expiresIn} 초"
                 )
-//                val intent = Intent(context, MainActivity::class.java)
-//                startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
             }
         }
 
@@ -138,7 +125,6 @@ class MenuFragment : Fragment() {
                 startActivity(intent)
             }
         }
-
         return binding.root
 
     }
@@ -147,7 +133,6 @@ class MenuFragment : Fragment() {
         fun newInstance(param1: String, param2: String) =
             MenuFragment().apply {
                 arguments = Bundle().apply {
-
                 }
             }
     }
