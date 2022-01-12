@@ -80,9 +80,7 @@ class MainActivity : AppCompatActivity() {
 
 
                                 var thisCalendarDay: CalendarDay = CalendarDay.from(thisResultDate)
-                                var eventDecorator =
-                                    EventDecorator(Color.rgb(0, num, num),
-                                        Collections.singleton(thisCalendarDay))
+                                var eventDecorator =EventDecorator(Color.rgb(200, num, num),Collections.singleton(thisCalendarDay))
                                 materialCalendar.addDecorator(eventDecorator)
                             }
                         }
