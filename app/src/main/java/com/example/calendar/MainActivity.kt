@@ -66,6 +66,9 @@ class MainActivity : AppCompatActivity() {
 
                 val random = Random()
                 val num = random.nextInt(256)
+                var colorArr : Array<String> = arrayOf("#FFFFFF","#000000","FFFFFF")
+
+
 
                 for (i in date.day..getDaysInMonth(calendar.get(Calendar.MONTH + 1),
                     calendar.get(Calendar.YEAR))) {
@@ -80,7 +83,7 @@ class MainActivity : AppCompatActivity() {
 
 
                                 var thisCalendarDay: CalendarDay = CalendarDay.from(thisResultDate)
-                                var eventDecorator =EventDecorator(Color.rgb(200, num, num),Collections.singleton(thisCalendarDay))
+                                var eventDecorator =EventDecorator(Color.rgb(200,num,num),Collections.singleton(thisCalendarDay))
                                 materialCalendar.addDecorator(eventDecorator)
                             }
                         }
