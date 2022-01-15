@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         if (!result.equals("")) {
             val resultData: List<PlanData> = gson.fromJson(result, listType.type)
 
+            Log.e("haeun", "resultData1: ${resultData}")
             for (i in resultData.indices) {
                 var plan = resultData[i].plan
                 var date = resultData[i].date
@@ -66,37 +67,66 @@ class MainActivity : AppCompatActivity() {
 
                 val random = Random()
                 val num = random.nextInt(256)
-                var colorArr : Array<String> = arrayOf("#FFFFFF","#000000","FFFFFF")
 
+                var colorArr: ArrayList<String> = ArrayList()
+                colorArr.add("#000000")
+                colorArr.add("#f1a039")
+                colorArr.add("#FF620E")
+                colorArr.add("#d42222")
+                colorArr.add("#FF0186")
 
-
-                for (i in date.day..getDaysInMonth(calendar.get(Calendar.MONTH + 1),
-                    calendar.get(Calendar.YEAR))) {
+                for (i in date.day..getDaysInMonth(
+                    calendar.get(Calendar.MONTH + 1),
+                    calendar.get(Calendar.YEAR)
+                )) {
                     var thisResultDate: Date = dateFormat.parse("${calendar.get(Calendar.YEAR)}-${calendar.get(Calendar.MONTH) + 1}-${i}")
                     var thisCalendar = Calendar.getInstance()
                     thisCalendar.time = thisResultDate
+//                    var calendarTime = thisCalendar.get(Calendar.DAY_OF_WEEK).toString()
 
+                    var resultColorArr: ArrayList<String> = ArrayList()
+                    var colornum = 0
+                    for (plans in resultData.indices) {
+                        var planDay = resultData[plans].day
+
+                        for (i in 0 until planDay.size) {
+
+                            if (thisCalendar.get(Calendar.DAY_OF_WEEK).toString() == getDateToInt(planDay)[i]) { // day 에 들어있는 값(함수를 사용해서 인트로 바꿈)과 캘린더에 일치하는 값이 있으면 EventDecorator
+                                resultColorArr.add(colorArr[colornum]) //haeun 컬러넣는부분을 수정해야함
+                            }
+                        }
+                        colornum +=1
+                    }
+
+                    var thisCalendarDay: CalendarDay = CalendarDay.from(thisResultDate)
+                    var eventDecorator =
+                        EventDecorator(resultColorArr, Collections.singleton(thisCalendarDay))
+                    materialCalendar.addDecorator(eventDecorator)
+
+                    /*
                         for (i in 0 until day.size) {
                             if (thisCalendar.get(Calendar.DAY_OF_WEEK)
                                     .toString() == getDateToInt(day)[i]
                             ) { // day 에 들어있는 값(함수를 사용해서 인트로 바꿈)과 캘린더에 일치하는 값이 있으면 EventDecorator
-
-
                                 var thisCalendarDay: CalendarDay = CalendarDay.from(thisResultDate)
-                                var eventDecorator =EventDecorator(Color.rgb(200,num,num),Collections.singleton(thisCalendarDay))
+                                var eventDecorator =EventDecorator(colorArr,Collections.singleton(thisCalendarDay))
                                 materialCalendar.addDecorator(eventDecorator)
                             }
                         }
-                    }
+
+                     */
+
+                }
 
 
                 for (i in 0..arr.size) {
-                    if (day.size < 1){
-                        var eventDecorator = EventDecorator(Color.RED, Collections.singleton(date))
+                    if (day.size < 1) {
+                        var eventDecorator = EventDecorator(colorArr, Collections.singleton(date))
                         materialCalendar.addDecorator(eventDecorator)
                     }
 
                 }
+
             }
         }
 
@@ -132,7 +162,8 @@ class MainActivity : AppCompatActivity() {
         materialCalendar.addDecorators(
             sundayDecorator,
             saturdayDecorator,
-            todayDecorator)
+            todayDecorator
+        )
 
         binding.menubt.setOnClickListener {
             val menuFragment = MenuFragment()
