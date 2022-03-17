@@ -2,7 +2,6 @@ package com.example.calendar
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -15,6 +14,7 @@ import com.google.gson.reflect.TypeToken
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.CalendarMode
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
+import java.lang.IllegalArgumentException
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -47,11 +47,10 @@ class MainActivity : AppCompatActivity() {
 
         val materialCalendar: MaterialCalendarView = findViewById(R.id.materialCalendar)
 
-        //haeun
         if (!result.equals("")) {
             val resultData: List<PlanData> = gson.fromJson(result, listType.type)
 
-            Log.e("haeun", "resultData1: ${resultData}")
+            Log.e("data", "resultData1: ${resultData}")
             for (i in resultData.indices) {
                 var plan = resultData[i].plan
                 var date = resultData[i].date
@@ -82,7 +81,6 @@ class MainActivity : AppCompatActivity() {
                     var thisResultDate: Date = dateFormat.parse("${calendar.get(Calendar.YEAR)}-${calendar.get(Calendar.MONTH) + 1}-${i}")
                     var thisCalendar = Calendar.getInstance()
                     thisCalendar.time = thisResultDate
-//                    var calendarTime = thisCalendar.get(Calendar.DAY_OF_WEEK).toString()
 
                     var resultColorArr: ArrayList<String> = ArrayList()
                     var colornum = 0
@@ -92,7 +90,7 @@ class MainActivity : AppCompatActivity() {
                         for (i in 0 until planDay.size) {
 
                             if (thisCalendar.get(Calendar.DAY_OF_WEEK).toString() == getDateToInt(planDay)[i]) { // day 에 들어있는 값(함수를 사용해서 인트로 바꿈)과 캘린더에 일치하는 값이 있으면 EventDecorator
-                                resultColorArr.add(colorArr[colornum]) //haeun 컬러넣는부분을 수정해야함
+                                resultColorArr.add(colorArr[colornum]) // 컬러넣는부분을 수정해야함
                             }
                         }
                         colornum +=1
@@ -102,19 +100,6 @@ class MainActivity : AppCompatActivity() {
                     var eventDecorator =
                         EventDecorator(resultColorArr, Collections.singleton(thisCalendarDay))
                     materialCalendar.addDecorator(eventDecorator)
-
-                    /*
-                        for (i in 0 until day.size) {
-                            if (thisCalendar.get(Calendar.DAY_OF_WEEK)
-                                    .toString() == getDateToInt(day)[i]
-                            ) { // day 에 들어있는 값(함수를 사용해서 인트로 바꿈)과 캘린더에 일치하는 값이 있으면 EventDecorator
-                                var thisCalendarDay: CalendarDay = CalendarDay.from(thisResultDate)
-                                var eventDecorator =EventDecorator(colorArr,Collections.singleton(thisCalendarDay))
-                                materialCalendar.addDecorator(eventDecorator)
-                            }
-                        }
-
-                     */
 
                 }
 
@@ -212,14 +197,15 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
-    fun getDaysInMonth(month: Int, year: Int): Int { // 지정한 달에 총 몇일이 있는지 계산하는 함수
-        return when (month - 1) {
+    fun getDaysInMonth(month: Int, year: Int): Int{
+        return when(month-1){
             Calendar.JANUARY, Calendar.MARCH, Calendar.MAY, Calendar.JULY, Calendar.AUGUST, Calendar.OCTOBER, Calendar.DECEMBER -> 31
             Calendar.APRIL, Calendar.JUNE, Calendar.SEPTEMBER, Calendar.NOVEMBER -> 30
-            Calendar.FEBRUARY -> if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) 29 else 28 // 윤년계산
-            else -> throw Exception("Exception Month")
+            Calendar.FEBRUARY -> if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) 29 else 28
+            else -> throw Exception("Invalid Month")
         }
     }
+
 
     fun getDateToInt(dayName: ArrayList<String>): ArrayList<String> {
         var result: ArrayList<String> = ArrayList()

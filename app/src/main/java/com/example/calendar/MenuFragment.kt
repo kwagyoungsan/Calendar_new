@@ -3,6 +3,7 @@ package com.example.calendar
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.calendar.databinding.FragmentMenuBinding
 import com.kakao.sdk.auth.LoginClient
 import com.kakao.sdk.auth.model.OAuthToken
@@ -23,8 +25,6 @@ class MenuFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mainActivity = context as MainActivity
-        Log.e("haeun", "context: "+context)
-        Log.e("haeun", "main: "+mainActivity)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -94,22 +94,27 @@ class MenuFragment : Fragment() {
         }
 
         UserApiClient.instance.me { user, error ->
-            if (error != null) {
-                Log.e(TAG, "사용자 정보 요청 실패", error)
-            } else if (user != null) {
-                Log.i(
-                    TAG, "사용자 정보 요청 성공" +
-                            "\n회원번호: ${user.id}" +
-                            "\n이메일: ${user.kakaoAccount?.email}" +
-                            "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
-                            "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}"
-                )
+            if (error != null) { // 로그아웃 상태
+                binding.kakaoLoginbt.setVisibility(View.VISIBLE)
+                binding.kakaoLogoutBt.setVisibility(View.GONE)
+                binding.kakaoUnlinkBt.setVisibility(View.GONE)
+            } else if (user != null) { // 로그인 상태
+                binding.kakaoLoginbt.setVisibility(View.GONE)
+                binding.kakaoLogoutBt.setVisibility(View.VISIBLE)
+                binding.kakaoUnlinkBt.setVisibility(View.VISIBLE)
             }
         }
 
         UserApiClient.instance.me{user, error->
-            binding.test123.text="닉네임: ${user?.kakaoAccount?.profile?.nickname}"
+            binding.kakaoInformation.text="\n이메일: ${user?.kakaoAccount?.email}"+"\n닉네임: ${user?.kakaoAccount?.profile?.nickname}"
+
+
+            Glide.with(this)
+                .load(user?.kakaoAccount?.profile?.thumbnailImageUrl)
+                .into(binding.kakaoProfile)
         }
+
+
 
         binding.kakaoLoginbt.setOnClickListener {
             if (LoginClient.instance.isKakaoTalkLoginAvailable(mainActivity)) {
@@ -125,6 +130,42 @@ class MenuFragment : Fragment() {
                 startActivity(intent)
             }
         }
+
+        binding.planlistMenu.setOnClickListener {
+            activity?.let{
+                val intent = Intent(context, ListActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
+        binding.kakaoLogoutBt.setOnClickListener {
+            UserApiClient.instance.logout { error ->
+                if (error != null) {
+                    Toast.makeText(mainActivity, "로그아웃 실패 $error", Toast.LENGTH_SHORT).show()
+                }else {
+                    Toast.makeText(mainActivity, "로그아웃 성공", Toast.LENGTH_SHORT).show()
+                }
+                val intent = Intent(context, MainActivity::class.java)
+                startActivity(intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP))
+                System.exit(0)
+            }
+        }
+
+
+
+        binding.kakaoUnlinkBt.setOnClickListener {
+            UserApiClient.instance.unlink { error ->
+                if (error != null) {
+                    Toast.makeText(mainActivity, "회원 탈퇴 실패 $error", Toast.LENGTH_SHORT).show()
+                }else {
+                    Toast.makeText(mainActivity, "회원 탈퇴 성공", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(context, MainActivity::class.java)
+                    startActivity(intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP))
+                    System.exit(0)
+                }
+            }
+        }
+
         return binding.root
 
     }
