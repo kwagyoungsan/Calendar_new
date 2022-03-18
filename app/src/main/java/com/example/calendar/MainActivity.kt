@@ -74,10 +74,7 @@ class MainActivity : AppCompatActivity() {
                 colorArr.add("#d42222")
                 colorArr.add("#FF0186")
 
-                for (i in date.day..getDaysInMonth(
-                    calendar.get(Calendar.MONTH + 1),
-                    calendar.get(Calendar.YEAR)
-                )) {
+                for (i in date.day..getDaysInMonth(calendar.get(Calendar.MONTH),calendar.get(Calendar.YEAR))) {
                     var thisResultDate: Date = dateFormat.parse("${calendar.get(Calendar.YEAR)}-${calendar.get(Calendar.MONTH) + 1}-${i}")
                     var thisCalendar = Calendar.getInstance()
                     thisCalendar.time = thisResultDate
@@ -197,12 +194,12 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
-    fun getDaysInMonth(month: Int, year: Int): Int{
-        return when(month-1){
+    fun getDaysInMonth(month: Int, year: Int): Int { // 지정한 달에 총 몇일이 있는지 계산하는 함수
+        return when (month) {
             Calendar.JANUARY, Calendar.MARCH, Calendar.MAY, Calendar.JULY, Calendar.AUGUST, Calendar.OCTOBER, Calendar.DECEMBER -> 31
             Calendar.APRIL, Calendar.JUNE, Calendar.SEPTEMBER, Calendar.NOVEMBER -> 30
-            Calendar.FEBRUARY -> if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) 29 else 28
-            else -> throw Exception("Invalid Month")
+            Calendar.FEBRUARY -> if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) 29 else 28 // 윤년계산
+            else -> throw Exception("Exception Month")
         }
     }
 
